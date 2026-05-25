@@ -1,0 +1,150 @@
+aid: rb2b
+name: RB2B
+description: >-
+  RB2B is a US-focused B2B website visitor identification platform that
+  resolves anonymous web traffic into person-level leads — names, LinkedIn
+  profiles, hashed and plaintext business emails, mobile ad IDs, and full
+  business profiles — and pushes them to sales, marketing, and ad-tech
+  systems. The product is delivered as a JavaScript pixel plus a knowledge-
+  base and pipeline of 50+ destination integrations (Slack, Microsoft Teams,
+  Salesforce, HubSpot, Clay, Zapier, Apollo, Customer.io, Demandbase, and
+  others), with global company-level identification and US-only person-
+  level resolution. RB2B operates a separate API Partner Program at
+  api.rb2b.com that exposes credit-metered Identification endpoints
+  (IP → HEM, IP → MAID, IP → Company Domain) and Enrichment endpoints
+  (HEM → LinkedIn, HEM → Business Profile, HEM → MAID, LinkedIn → Email,
+  LinkedIn → Phone, Email → LinkedIn, Email → MAID) for SaaS developers,
+  GTM engineers, retailers, and ad-tech platforms that want to embed
+  identity resolution into their own apps and identity graphs. The platform
+  is SOC 2 Type II certified.
+type: Index
+position: Provider
+access: 3rd-Party
+image: https://kinlane-productions.s3.amazonaws.com/apis-json/apis-json-logo.jpg
+tags:
+  - Identity Resolution
+  - Visitor Identification
+  - B2B Data
+  - Lead Generation
+  - Sales Intelligence
+  - Marketing
+  - Data Enrichment
+  - LinkedIn Enrichment
+  - Hashed Email
+  - Mobile Ad ID
+  - Firmographics
+  - Webhooks
+  - Pixel
+  - Adtech
+  - Identity Graph
+url: https://raw.githubusercontent.com/api-evangelist/rb2b/refs/heads/main/apis.yml
+created: '2026-05-25'
+modified: '2026-05-25'
+specificationVersion: '0.20'
+apis:
+- aid: rb2b:rb2b-identification-api
+  name: RB2B Identification API
+  tags:
+    - Identity Resolution
+    - Identification
+    - IP Lookup
+    - Hashed Email
+    - Mobile Ad ID
+    - B2B Data
+  humanURL: https://www.rb2b.com/apis
+  description: >-
+    Credit-metered Identification endpoints that convert anonymous web
+    signals (IP addresses and user agents) into business identifiers,
+    including IP → HEM (hashed email), IP → MAID (mobile ad ID), and
+    IP → Company Domain. Hosted on api.rb2b.com and accessed through the
+    RB2B API Partner Program with its own account, credit balance, and
+    Postman-based documentation. Person-level resolution is US-only;
+    company-level resolution is global.
+  properties:
+    - url: https://www.rb2b.com/apis
+      type: Documentation
+    - url: https://postman.api.rb2b.com/
+      type: Postman
+    - url: https://ui.api.rb2b.com/login
+      type: Portal
+    - url: https://support.rb2b.com/en/articles/12579420-rb2b-s-api-partner-program
+      type: SignUp
+- aid: rb2b:rb2b-enrichment-api
+  name: RB2B Enrichment API
+  tags:
+    - Enrichment
+    - LinkedIn
+    - Email
+    - Phone
+    - Business Profile
+    - B2B Data
+  humanURL: https://www.rb2b.com/apis
+  description: >-
+    Credit-metered Enrichment endpoints that take a known identifier
+    (hashed email, LinkedIn URL, plaintext email, MAID, or company domain)
+    and return additional B2B attributes — LinkedIn URL, full business
+    profile, multiple personal or business emails, phone number, MAID, and
+    firmographics. Designed for SaaS developers, GTM engineers, and ad-tech
+    platforms that want to enrich their own identity graphs. Hosted on
+    api.rb2b.com and accessed through the RB2B API Partner Program.
+  properties:
+    - url: https://www.rb2b.com/apis
+      type: Documentation
+    - url: https://postman.api.rb2b.com/
+      type: Postman
+    - url: https://ui.api.rb2b.com/login
+      type: Portal
+- aid: rb2b:rb2b-pixel-webhooks
+  name: RB2B Pixel and Destination Webhooks
+  tags:
+    - Pixel
+    - JavaScript
+    - Webhooks
+    - Integrations
+    - Tag Manager
+  humanURL: https://support.rb2b.com/en/
+  description: >-
+    The RB2B JavaScript pixel installed in a site header (or via Google
+    Tag Manager / Segment / RudderStack / Shopify / Webflow / WordPress /
+    HubSpot CMS / Wix) is the primary data ingestion surface for RB2B.
+    Resolved visitors are pushed downstream through a webhook and
+    destination layer that fan out to 50+ ad, CRM, marketing-automation,
+    enrichment, and orchestration tools — Slack, Microsoft Teams,
+    Salesforce, HubSpot, Clay, Zapier, Customer.io, Apollo, Demandbase,
+    Google Ads, Meta Ads, LinkedIn Ads, Webhook URLs, and others — based
+    on the customer's tier and configuration.
+  properties:
+    - url: https://support.rb2b.com/en/
+      type: Documentation
+    - url: https://support.rb2b.com/en/articles/9061641-setup-guide-apollo-io
+      type: IntegrationGuide
+common:
+  - type: Website
+    url: https://www.rb2b.com
+  - type: Pricing
+    url: https://www.rb2b.com/pricing
+  - type: Partner
+    url: https://www.rb2b.com/partner
+  - type: Support
+    url: https://support.rb2b.com/en/
+  - type: APIs
+    url: https://www.rb2b.com/apis
+  - type: APIPortal
+    url: https://ui.api.rb2b.com/login
+  - type: APIDocumentation
+    url: https://postman.api.rb2b.com/
+  - type: APIPartnerProgram
+    url: https://support.rb2b.com/en/articles/12579420-rb2b-s-api-partner-program
+  - type: APICollections
+    url: https://support.rb2b.com/en/collections/16023167-api-partner-program
+  - type: Contact
+    url: mailto:support@rb2b.com
+  - type: Twitter
+    url: https://twitter.com/RetentionAdam
+  - type: LinkedIn
+    url: https://www.linkedin.com/company/rb2b
+  - type: Instagram
+    url: https://www.instagram.com/retentiondotcom/
+maintainers:
+  - FN: Kin Lane
+    email: kin@apievangelist.com
