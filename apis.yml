@@ -68,7 +68,7 @@ apis:
     - url: https://ui.api.rb2b.com/login
       type: Portal
     - url: https://support.rb2b.com/en/articles/12579420-rb2b-s-api-partner-program
-      type: SignUp
+      type: Signup
 - aid: rb2b:rb2b-enrichment-api
   name: RB2B Enrichment API
   tags:
