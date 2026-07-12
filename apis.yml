@@ -119,6 +119,10 @@ apis:
     - url: https://support.rb2b.com/en/articles/9061641-setup-guide-apollo-io
       type: IntegrationGuide
 common:
+  - type: TrustCenter
+    url: security/rb2b-trust-center.yml
+  - type: DomainSecurity
+    url: security/rb2b-domain-security.yml
   - type: Website
     url: https://www.rb2b.com
   - type: Pricing
