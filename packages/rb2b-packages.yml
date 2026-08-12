@@ -1,0 +1,98 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://registry.npmjs.org (search + package metadata endpoints),
+  https://api.github.com, and the RB2B install guides at support.rb2b.com.
+  Versions and publish dates are read from the registry metadata endpoints at
+  fetch time, not from prose.
+description: >-
+  RB2B ships no conventional server-side SDK in any language. Its first-party
+  distributable code is (a) an MCP server on npm that wraps the Identity /
+  Enrichment API, (b) a WordPress plugin distributed from GitHub, and (c) the
+  browser tracking pixel distributed from CloudFront. PyPI, RubyGems, Packagist,
+  crates.io, NuGet, Maven Central and pkg.go.dev return no RB2B package. There
+  is no rb2b GitHub organisation — https://api.github.com/orgs/rb2b returns 404.
+registries_checked:
+  - {registry: npm, status: 200, result: "@rb2b/rb2b-apis-mcp found; n8n-nodes-rb2b found (third-party)"}
+  - {registry: pypi, status: 404, result: no rb2b package}
+  - {registry: rubygems, status: 404, result: no rb2b gem}
+  - {registry: github-org, status: 404, result: no rb2b GitHub organisation}
+packages:
+  - language: javascript
+    registry: npm
+    name: "@rb2b/rb2b-apis-mcp"
+    url: https://www.npmjs.com/package/@rb2b/rb2b-apis-mcp
+    source: https://github.com/robbclarke/RB2B-APIs-MCP
+    install: npx -y @rb2b/rb2b-apis-mcp
+    official: true
+    version: 1.1.7
+    published: '2026-04-13'
+    first_published: '2026-04-08'
+    license: MIT
+    kind: mcp-server
+    note: >-
+      The only registry-published RB2B client library. Published under the @rb2b
+      npm scope, package author "RB2B". Wraps the 13 REST endpoints of
+      https://api.rb2b.com/api/v1 as 19 MCP tools; ships a bin,
+      `rb2b-apis-mcp`. The named git repository is not publicly readable
+      (GitHub API 404) — the npm tarball is the readable artifact.
+  - language: php
+    registry: github
+    name: RB2B-WordPress-Plugin
+    url: https://github.com/robbclarke/RB2B-WordPress-Plugin
+    source: https://github.com/robbclarke/RB2B-WordPress-Plugin
+    install: Download the repository ZIP and upload it via Plugins → Add New Plugin → Upload Plugin
+    official: true
+    version: null
+    published: null
+    kind: cms-plugin
+    note: >-
+      Injects the RB2B tracking snippet into the WordPress global header; the
+      user pastes their RB2B Account ID from
+      https://app.rb2b.com/script/setup_script_html. Distributed from a GitHub
+      repository, not the WordPress.org plugin directory, so there is no
+      registry metadata endpoint and no released version to read — version and
+      published are null because there is nothing published to record, not
+      because they were not checked. RB2B's changelog dates a plugin update to
+      2026-05-13 ("updated to ensure that it works with the latest version of
+      WordPress").
+  - language: javascript
+    registry: cdn
+    name: rb2b tracking pixel (reb2b)
+    url: https://ddwl4m2hdecbv.cloudfront.net/b/{account_id}/{account_id}.js.gz
+    source: https://support.rb2b.com/en/articles/10126115-installing-your-rb2b-tracking-script
+    install: <script>…reb2b.load("YOUR-ACCOUNT-ID")…</script> before the closing </head>
+    official: true
+    version: null
+    published: null
+    kind: browser-pixel
+    note: >-
+      Per-account build served from CloudFront; the URL embeds the account ID,
+      not a version, so it floats to whatever RB2B currently serves and a
+      consumer cannot tell what they are getting. There is no CDN JSON metadata
+      endpoint for this path. The only version marker RB2B exposes is an
+      in-snippet constant, `reb2b.SNIPPET_VERSION = "1.0.1"`, documented in the
+      framework install guides — recorded here as a note rather than as
+      `version:` because it labels the loader snippet, not the fetched bundle.
+  - language: javascript
+    registry: npm
+    name: n8n-nodes-rb2b
+    url: https://www.npmjs.com/package/n8n-nodes-rb2b
+    install: npm install n8n-nodes-rb2b
+    official: false
+    version: 1.0.3
+    published: '2025-11-14'
+    kind: community-connector
+    note: >-
+      Third-party n8n community node that receives RB2B visitor webhooks. Listed
+      for completeness and explicitly NOT counted as a first-party SDK. RB2B
+      does document an official n8n integration on its own side
+      (support.rb2b.com/en/articles/11838541-setup-guide-n8n).
+sdk_summary:
+  official_count: 3
+  languages: [javascript, php]
+  server_side_sdk: false
+  server_side_sdk_note: >-
+    No first-party REST client library exists for any server-side language. An
+    integrator calls https://api.rb2b.com/api/v1 with a plain HTTPS request and
+    an Api-Key header, or drives it through the MCP server.

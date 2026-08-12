@@ -1,0 +1,94 @@
+generated: '2026-08-12'
+method: probed
+source: >-
+  Live unauthenticated probes of https://api.rb2b.com/api/v1 and
+  https://app.rb2b.com/api/v1 on 2026-08-12, plus the status-code handling in
+  the provider's published client (@rb2b/rb2b-apis-mcp 1.1.7, dist/api.js) and
+  the documented error responses in the OEM API guide.
+description: >-
+  RB2B publishes no error reference and no OpenAPI, so this catalogue is built
+  from responses actually observed on the wire plus the codes the provider's own
+  client is written to handle. The envelope is a flat JSON object with a single
+  `error` key carrying a snake_case slug — it is NOT RFC 9457
+  application/problem+json: there is no type, title, status, detail or instance
+  member, and the content-type is application/json.
+format: proprietary
+rfc9457: false
+envelope:
+  content_type: application/json; charset=utf-8
+  shape: '{"error": "<snake_case_slug>"}'
+  fields:
+    error: >-
+      Machine-readable slug, or in at least one documented case a human
+      sentence ("domain does not exist for account"). RB2B does not publish the
+      list, so a client cannot enumerate the values in advance.
+  correlation:
+    header: x-request-id
+    note: >-
+      Every response carries an x-request-id UUID (and an x-runtime timing
+      header). RB2B does not document it, but it is the only correlation handle
+      available when opening a support ticket.
+status_codes:
+  - status: 401
+    meaning: Authentication failed.
+    observed: true
+    bodies:
+      - '{"error":"missing_api_key"}'
+      - '{"error":"invalid_api_key_format"}'
+    remediation: >-
+      Send the account key in the Api-Key request header. Identity API keys come
+      from https://ui.api.rb2b.com; OEM keys from
+      https://app.rb2b.com/oem_dashboard. The two are not interchangeable.
+  - status: 404
+    meaning: No record found for the provided input.
+    observed: false
+    documented_by: "@rb2b/rb2b-apis-mcp dist/api.js"
+    remediation: >-
+      A miss, not a fault — the identity graph has no match for that IP, email,
+      hashed email or LinkedIn slug. Do not retry with the same input.
+    note: >-
+      Overloading 404 for "resolved nothing" means an agent cannot distinguish a
+      lookup miss from a wrong path without knowing the endpoint exists.
+  - status: 429
+    meaning: Rate limit exceeded — 50 requests/second per endpoint.
+    observed: false
+    documented_by: "@rb2b/rb2b-apis-mcp dist/api.js and README"
+    remediation: Back off and retry. No Retry-After or RateLimit-* header is documented or was observed.
+  - status: 200
+    meaning: Success.
+    observed: false
+    note: Requires an authenticated key; not exercised in this pass.
+error_codes:
+  - code: missing_api_key
+    status: 401
+    surfaces: [api.rb2b.com/api/v1, app.rb2b.com/api/v1]
+    meaning: No Api-Key request header was present.
+    action: Add the Api-Key header.
+    evidence: probed 2026-08-12
+  - code: invalid_api_key_format
+    status: 401
+    surfaces: [api.rb2b.com/api/v1]
+    meaning: The Api-Key header value did not match the expected key format.
+    action: >-
+      Re-copy the key from the console. Distinct from a valid-shaped but
+      unrecognised key, whose response was not exercised in this pass.
+    evidence: probed 2026-08-12
+  - code: domain does not exist for account
+    status: null
+    surfaces: [app.rb2b.com/api/v1]
+    operation: POST /delete_domain
+    meaning: The domain named in the request body is not attached to the OEM account.
+    action: List the account's domains with GET /domains before deleting.
+    evidence: >-
+      Documented verbatim in the OEM API guide as the error response body. RB2B
+      does not state which HTTP status accompanies it.
+gaps:
+  - No published error reference page for either surface.
+  - No RFC 9457 problem+json; no stable error `type` URI an agent can key on.
+  - No documented enumeration of error slugs — the set can only be discovered by hitting them.
+  - 404 conflates "no such route" with "no identity match".
+  - No Retry-After or RateLimit-* headers documented alongside the 429.
+related:
+  - conventions/rb2b-conventions.yml
+  - authentication/rb2b-authentication.yml
+  - rate-limits/rb2b-rate-limits.yml

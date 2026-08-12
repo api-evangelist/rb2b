@@ -1,0 +1,275 @@
+# RB2B Knowledge Base and Help Center
+
+> Advice and answers from the RB2B team.
+
+## RB2B Overview
+
+- [What is RB2B and how does it work?](https://support.rb2b.com/en/articles/8891294-what-is-rb2b-and-how-does-it-work.md)
+- [Building a Better Identity Graph: Why Our Data Is Different](https://support.rb2b.com/en/articles/11071698-building-a-better-identity-graph-why-our-data-is-different.md)
+- [What Type of Information Does RB2B Provide?](https://support.rb2b.com/en/articles/9055740-what-type-of-information-does-rb2b-provide.md)
+- [Staying Compliant and Effective: A Retention.com Guide to Email Regulations](https://support.rb2b.com/en/articles/8922650-staying-compliant-and-effective-a-retention-com-guide-to-email-regulations.md)
+- [How does RB2B collect or use our data?](https://support.rb2b.com/en/articles/8795524-how-does-rb2b-collect-or-use-our-data.md)
+- [The Impact of Script Placement on Profile Collection Efficiency](https://support.rb2b.com/en/articles/9242675-the-impact-of-script-placement-on-profile-collection-efficiency.md)
+- [Impact of Cookie Acceptance Policies on Tracking Script Performance](https://support.rb2b.com/en/articles/9203490-impact-of-cookie-acceptance-policies-on-tracking-script-performance.md)
+- [Single Page vs. Multi-Page Sites: A Data Collection Perspective](https://support.rb2b.com/en/articles/9242700-single-page-vs-multi-page-sites-a-data-collection-perspective.md)
+- [What factors can affect the performance of RB2B's tracking script?](https://support.rb2b.com/en/articles/9482416-what-factors-can-affect-the-performance-of-rb2b-s-tracking-script.md)
+- [Why RB2B Shows Fewer Visitors Than Your Ad Platform Reports](https://support.rb2b.com/en/articles/11961400-why-rb2b-shows-fewer-visitors-than-your-ad-platform-reports.md)
+- [External Influences on RB2B's Identification Ability](https://support.rb2b.com/en/articles/9077503-external-influences-on-rb2b-s-identification-ability.md)
+- [The Asynchronous Advantage of RB2B's Script](https://support.rb2b.com/en/articles/8994855-the-asynchronous-advantage-of-rb2b-s-script.md)
+- [Why WP Rocket's "Delay JavaScript Execution" Can Break RB2B Visitor Identification](https://support.rb2b.com/en/articles/12508057-why-wp-rocket-s-delay-javascript-execution-can-break-rb2b-visitor-identification.md)
+
+## Getting Started
+
+- [What to Expect After Signing Up & Installing Your RB2B Script](https://support.rb2b.com/en/articles/9004902-what-to-expect-after-signing-up-installing-your-rb2b-script.md)
+- [Registering for RB2B](https://support.rb2b.com/en/articles/8851036-registering-for-rb2b.md)
+- [Registration Checklist for New Users](https://support.rb2b.com/en/articles/8975716-registration-checklist-for-new-users.md)
+- [Troubleshooting: Registration](https://support.rb2b.com/en/articles/14808334-troubleshooting-registration.md)
+- [Installing Your RB2B Tracking Script](https://support.rb2b.com/en/articles/10126115-installing-your-rb2b-tracking-script.md)
+- [RB2B Install Guide for WordPress](https://support.rb2b.com/en/articles/8795573-rb2b-install-guide-for-wordpress.md)
+- [RB2B Install Guide for Google Tag Manager](https://support.rb2b.com/en/articles/8795712-rb2b-install-guide-for-google-tag-manager.md)
+- [RB2B Install Guide for Wix](https://support.rb2b.com/en/articles/8981126-rb2b-install-guide-for-wix.md)
+- [RB2B Install Guide for Hubspot CMS](https://support.rb2b.com/en/articles/8981161-rb2b-install-guide-for-hubspot-cms.md)
+- [RB2B Install Guide for Squarespace](https://support.rb2b.com/en/articles/8981209-rb2b-install-guide-for-squarespace.md)
+- [RB2B Install Guide for Webflow](https://support.rb2b.com/en/articles/8981341-rb2b-install-guide-for-webflow.md)
+- [RB2B Install Guide for Framer](https://support.rb2b.com/en/articles/9010507-rb2b-install-guide-for-framer.md)
+- [RB2B Install Guide for Shopify](https://support.rb2b.com/en/articles/9010742-rb2b-install-guide-for-shopify.md)
+- [RB2B Install Guide for Tilda](https://support.rb2b.com/en/articles/9108327-rb2b-install-guide-for-tilda.md)
+- [RB2B Install Guide for Kajabi](https://support.rb2b.com/en/articles/9367429-rb2b-install-guide-for-kajabi.md)
+- [RB2B Install Guide for Unbounce](https://support.rb2b.com/en/articles/10590055-rb2b-install-guide-for-unbounce.md)
+- [RB2B Install Guide for Your Website via Code](https://support.rb2b.com/en/articles/8795874-rb2b-install-guide-for-your-website-via-code.md)
+- [RB2B Install Guide for Next.js](https://support.rb2b.com/en/articles/9116902-rb2b-install-guide-for-next-js.md)
+- [RB2B Install Guide for React.js](https://support.rb2b.com/en/articles/9117086-rb2b-install-guide-for-react-js.md)
+- [RB2B Install Guide for Typescript](https://support.rb2b.com/en/articles/9503690-rb2b-install-guide-for-typescript.md)
+- [RB2B Install Guide for Angular](https://support.rb2b.com/en/articles/9117114-rb2b-install-guide-for-angular.md)
+- [Verifying Your Script Installation](https://support.rb2b.com/en/articles/8908387-verifying-your-script-installation.md)
+- [Manually Verifying Your Script Installation](https://support.rb2b.com/en/articles/11019047-manually-verifying-your-script-installation.md)
+- [Common Issues Impacting Script Verification in the Dashboard](https://support.rb2b.com/en/articles/9000685-common-issues-impacting-script-verification-in-the-dashboard.md)
+- [Installation Debugger \(Beta\): Identify and Fix RB2B Script Issues Faster](https://support.rb2b.com/en/articles/13868904-installation-debugger-beta-identify-and-fix-rb2b-script-issues-faster.md)
+- [Installation Debugger \(Beta\): Results Definitions](https://support.rb2b.com/en/articles/13897189-installation-debugger-beta-results-definitions.md): Understanding the Installation Debugger results.
+- [Troubleshooting: Script Verification Error Messages](https://support.rb2b.com/en/articles/10032598-troubleshooting-script-verification-error-messages.md)
+- [Troubleshooting: Malformed Tracking Snippets](https://support.rb2b.com/en/articles/10032477-troubleshooting-malformed-tracking-snippets.md)
+- [Troubleshooting: Check for Content Security Policies \(CSP\) Issues](https://support.rb2b.com/en/articles/11793916-troubleshooting-check-for-content-security-policies-csp-issues.md)
+- [Troubleshooting: No Collection](https://support.rb2b.com/en/articles/10032316-troubleshooting-no-collection.md)
+- [Troubleshooting: Cookie Policy Banner Blocking RB2B](https://support.rb2b.com/en/articles/10032600-troubleshooting-cookie-policy-banner-blocking-rb2b.md)
+- [Troubleshooting: Low Profile Volume in RB2B](https://support.rb2b.com/en/articles/10032447-troubleshooting-low-profile-volume-in-rb2b.md)
+
+## Best Practices
+
+- [Quieting the Noise: How to Filter for Relevant Leads in RB2B](https://support.rb2b.com/en/articles/11799384-quieting-the-noise-how-to-filter-for-relevant-leads-in-rb2b.md)
+- [Optimizing credit consumption and targeting high-intent leads](https://support.rb2b.com/en/articles/13380437-optimizing-credit-consumption-and-targeting-high-intent-leads.md)
+- [How to Improve Your RB2B Collection Rates](https://support.rb2b.com/en/articles/9188881-how-to-improve-your-rb2b-collection-rates.md)
+- [Why You Should Invite Your Team to RB2B](https://support.rb2b.com/en/articles/13927265-why-you-should-invite-your-team-to-rb2b.md)
+- [Global Visitor Tracking](https://support.rb2b.com/en/articles/11185399-global-visitor-tracking.md)
+- [What is a Consent Management Tool?](https://support.rb2b.com/en/articles/11164096-what-is-a-consent-management-tool.md)
+- [Using CookieYes Cookie Consent with RB2B](https://support.rb2b.com/en/articles/9375019-using-cookieyes-cookie-consent-with-rb2b.md)
+- [Best Practices for Using a Consent Management Tool with RB2B](https://support.rb2b.com/en/articles/11204631-best-practices-for-using-a-consent-management-tool-with-rb2b.md)
+- [Considerations When Controlling RB2B's Functionality With Your Cookie Policy Banner](https://support.rb2b.com/en/articles/9611828-considerations-when-controlling-rb2b-s-functionality-with-your-cookie-policy-banner.md)
+- [How to configure Google Tag Manager to fire the RB2B tag only after consent is given](https://support.rb2b.com/en/articles/14035630-how-to-configure-google-tag-manager-to-fire-the-rb2b-tag-only-after-consent-is-given.md)
+- [Knowing When to Reach Out - Understanding Visitor Signals](https://support.rb2b.com/en/articles/12818869-knowing-when-to-reach-out-understanding-visitor-signals.md)
+- [How to Reach Out - Timing, Tone, and Personalization that Convert](https://support.rb2b.com/en/articles/12819079-how-to-reach-out-timing-tone-and-personalization-that-convert.md)
+- [Outreach Templates: Turning Identified Visitors into Conversations](https://support.rb2b.com/en/articles/12830013-outreach-templates-turning-identified-visitors-into-conversations.md)
+- [Using LinkedIn Automation with RB2B](https://support.rb2b.com/en/articles/10471310-using-linkedin-automation-with-rb2b.md)
+- [Using RB2B for Ad Retargeting](https://support.rb2b.com/en/articles/13441184-using-rb2b-for-ad-retargeting.md)
+- [Updating Your Privacy Policy](https://support.rb2b.com/en/articles/8795972-updating-your-privacy-policy.md)
+- [Updating Your Cookie Banner](https://support.rb2b.com/en/articles/9272256-updating-your-cookie-banner.md)
+
+## Features
+
+- [Contact-Level Identification](https://support.rb2b.com/en/articles/11155068-contact-level-identification.md)
+- [Company-Level Identification](https://support.rb2b.com/en/articles/11155094-company-level-identification.md)
+- [Resolution Types Explained: Basic vs. Premium Visitor Identification](https://support.rb2b.com/en/articles/13639701-resolution-types-explained-basic-vs-premium-visitor-identification.md)
+- [Where to Find Information on Repeat Website Visits and Page Views](https://support.rb2b.com/en/articles/11070732-where-to-find-information-on-repeat-website-visits-and-page-views.md)
+- [Access to UTM Parameters and Other Identifiers](https://support.rb2b.com/en/articles/11070773-access-to-utm-parameters-and-other-identifiers.md)
+- [URL Restrictions](https://support.rb2b.com/en/articles/9949569-url-restrictions.md)
+- [Domain Exclusion List](https://support.rb2b.com/en/articles/11508544-domain-exclusion-list.md)
+- [Preventing Repeat Visitor Collection](https://support.rb2b.com/en/articles/9949586-preventing-repeat-visitor-collection.md)
+- [Troubleshooting: URL Restrictions](https://support.rb2b.com/en/articles/14886850-troubleshooting-url-restrictions.md)
+- [Email Validation](https://support.rb2b.com/en/articles/11010034-email-validation.md)
+- [Setup Guide for Hot Leads Tagging](https://support.rb2b.com/en/articles/9357651-setup-guide-for-hot-leads-tagging.md)
+- [Viewing Profiles Who Have Been Tagged as Hot Leads](https://support.rb2b.com/en/articles/9744699-viewing-profiles-who-have-been-tagged-as-hot-leads.md)
+- [Filtering Hot Leads Visitors](https://support.rb2b.com/en/articles/9744741-filtering-hot-leads-visitors.md)
+- [Viewing an Existing Hot Leads Filter](https://support.rb2b.com/en/articles/9745791-viewing-an-existing-hot-leads-filter.md)
+- [Hot Leads Industry Category Mapping](https://support.rb2b.com/en/articles/9766581-hot-leads-industry-category-mapping.md)
+- [Manually Tagging or Untagging a Profile as a Hot Lead](https://support.rb2b.com/en/articles/11668916-manually-tagging-or-untagging-a-profile-as-a-hot-lead.md)
+- [Can I limit my credit usage to ICP-only profiles?](https://support.rb2b.com/en/articles/9401681-can-i-limit-my-credit-usage-to-icp-only-profiles.md)
+- [Will a newly created Hot Leads tag apply retroactively?](https://support.rb2b.com/en/articles/9766573-will-a-newly-created-hot-leads-tag-apply-retroactively.md)
+- [Setup Guide for Hot Pages](https://support.rb2b.com/en/articles/9312700-setup-guide-for-hot-pages.md)
+- [Viewing Profiles Who Have Visited Hot Pages](https://support.rb2b.com/en/articles/9312751-viewing-profiles-who-have-visited-hot-pages.md)
+- [Filtering Hot Page Visitors](https://support.rb2b.com/en/articles/9312767-filtering-hot-page-visitors.md)
+- [How do I remove a Hot Page?](https://support.rb2b.com/en/articles/9312747-how-do-i-remove-a-hot-page.md)
+- [Why does a user have a Hot Page tag if none of their visited pages are marked as Hot Pages?](https://support.rb2b.com/en/articles/9312776-why-does-a-user-have-a-hot-page-tag-if-none-of-their-visited-pages-are-marked-as-hot-pages.md)
+- [Does a visitor's Hot Page tag persist regardless of my current plan?](https://support.rb2b.com/en/articles/9319518-does-a-visitor-s-hot-page-tag-persist-regardless-of-my-current-plan.md)
+- [Add Multiple Domains to Your RB2B Account](https://support.rb2b.com/en/articles/11775948-add-multiple-domains-to-your-rb2b-account.md)
+- [Choosing Between an Additional Domain Seat and a Separate Account](https://support.rb2b.com/en/articles/11972100-choosing-between-an-additional-domain-seat-and-a-separate-account.md)
+- [Multiple Domains FAQs](https://support.rb2b.com/en/articles/11992727-multiple-domains-faqs.md)
+- [CSV Exports](https://support.rb2b.com/en/articles/9204398-csv-exports.md)
+
+## Dashboard
+
+- [Secure Login Options in RB2B](https://support.rb2b.com/en/articles/8850949-secure-login-options-in-rb2b.md)
+- [Logging Out of the Dashboard](https://support.rb2b.com/en/articles/8930892-logging-out-of-the-dashboard.md)
+- [Login Alternatives for Microsoft Outlook Users with SafeLinks](https://support.rb2b.com/en/articles/9611743-login-alternatives-for-microsoft-outlook-users-with-safelinks.md)
+- [Authentication Passkeys](https://support.rb2b.com/en/articles/10358917-authentication-passkeys.md)
+- [Troubleshooting: Login](https://support.rb2b.com/en/articles/11035843-troubleshooting-login.md)
+- [Viewing Identified Visitors](https://support.rb2b.com/en/articles/8871017-viewing-identified-visitors.md)
+- [Accessing Detailed Profile Information](https://support.rb2b.com/en/articles/8908847-accessing-detailed-profile-information.md)
+- [Searching for Profiles](https://support.rb2b.com/en/articles/9627131-searching-for-profiles.md)
+- [Visitor Profile FAQs](https://support.rb2b.com/en/articles/11662812-visitor-profile-faqs.md)
+- [Managing Your Script in RB2B](https://support.rb2b.com/en/articles/11624080-managing-your-script-in-rb2b.md)
+- [Best Practices for Adding a Domain to RB2B](https://support.rb2b.com/en/articles/11624328-best-practices-for-adding-a-domain-to-rb2b.md)
+- [Integrations](https://support.rb2b.com/en/articles/8976063-integrations.md)
+- [Viewing Your Collection Analytics](https://support.rb2b.com/en/articles/8931003-viewing-your-collection-analytics.md)
+- [Comparing RB2B Stats with Google Analytics](https://support.rb2b.com/en/articles/11490299-comparing-rb2b-stats-with-google-analytics.md)
+- [Updating Your Company Information in RB2B](https://support.rb2b.com/en/articles/10223160-updating-your-company-information-in-rb2b.md)
+- [Understanding RB2B Company Account Structure](https://support.rb2b.com/en/articles/10223188-understanding-rb2b-company-account-structure.md)
+- [How to Permanently Delete Your RB2B Company Account](https://support.rb2b.com/en/articles/12606705-how-to-permanently-delete-your-rb2b-company-account.md)
+- [Company Account Management FAQs](https://support.rb2b.com/en/articles/11825360-company-account-management-faqs.md)
+- [Gaining Access to an Existing RB2B Account](https://support.rb2b.com/en/articles/13307469-gaining-access-to-an-existing-rb2b-account.md)
+- [Managing Your Individual User Account](https://support.rb2b.com/en/articles/8981381-managing-your-individual-user-account.md)
+- [Adding or Removing Dashboard Users](https://support.rb2b.com/en/articles/10223171-adding-or-removing-dashboard-users.md)
+- [Viewing a User’s Login History](https://support.rb2b.com/en/articles/8986688-viewing-a-user-s-login-history.md)
+- [How to Move Users Between RB2B Accounts](https://support.rb2b.com/en/articles/11992286-how-to-move-users-between-rb2b-accounts.md)
+- [User Management FAQs](https://support.rb2b.com/en/articles/11992268-user-management-faqs.md)
+- [Managing Notifications From RB2B](https://support.rb2b.com/en/articles/9208583-managing-notifications-from-rb2b.md)
+
+## Integrations
+
+- [Integration Logs](https://support.rb2b.com/en/articles/10512812-integration-logs.md)
+- [Manually Syncing a Profile in RB2B](https://support.rb2b.com/en/articles/10514593-manually-syncing-a-profile-in-rb2b.md)
+- [How RB2B's Integrations Work](https://support.rb2b.com/en/articles/10551225-how-rb2b-s-integrations-work.md)
+- [Controlling Company-Level Visitor Identification for Individual Integrations](https://support.rb2b.com/en/articles/11185336-controlling-company-level-visitor-identification-for-individual-integrations.md)
+- [Setup Guide: Apollo.io](https://support.rb2b.com/en/articles/9061641-setup-guide-apollo-io.md)
+- [Troubleshooting: Apollo.io](https://support.rb2b.com/en/articles/10090963-troubleshooting-apollo-io.md)
+- [Apollo.io FAQs](https://support.rb2b.com/en/articles/9806222-apollo-io-faqs.md): Frequently asked questions about RB2B's Apollo.io integration.
+- [Setup Guide: Clay](https://support.rb2b.com/en/articles/8976660-setup-guide-clay.md)
+- [Best Practices: Getting the Most from RB2B + Clay](https://support.rb2b.com/en/articles/12831902-best-practices-getting-the-most-from-rb2b-clay.md)
+- [Setup Guide: n8n](https://support.rb2b.com/en/articles/11838541-setup-guide-n8n.md)
+- [Best Practices: Getting the Most from RB2B + n8n](https://support.rb2b.com/en/articles/12831955-best-practices-getting-the-most-from-rb2b-n8n.md)
+- [n8n FAQs](https://support.rb2b.com/en/articles/11884410-n8n-faqs.md): Frequently asked questions about RB2B's n8n integration.
+- [n8n Workflow: Tracking Page Views, Visit History, and Multi-Day Engagement with RB2B](https://support.rb2b.com/en/articles/12844304-n8n-workflow-tracking-page-views-visit-history-and-multi-day-engagement-with-rb2b.md)
+- [n8n Workflow: Detecting When Multiple People From the Same Company Visit Your Website](https://support.rb2b.com/en/articles/12858721-n8n-workflow-detecting-when-multiple-people-from-the-same-company-visit-your-website.md)
+- [n8n Workflow: Alerting Your Team When a Returning Visitor Comes Back to Your Website](https://support.rb2b.com/en/articles/12883935-n8n-workflow-alerting-your-team-when-a-returning-visitor-comes-back-to-your-website.md)
+- [Setup Guide: Smartlead](https://support.rb2b.com/en/articles/9005008-setup-guide-smartlead.md)
+- [Smartlead FAQS](https://support.rb2b.com/en/articles/9805836-smartlead-faqs.md): Frequently asked questions about RB2B's Smartlead integration.
+- [Setup Guide: Zapier](https://support.rb2b.com/en/articles/9072095-setup-guide-zapier.md)
+- [Need to send data from RB2B to a platform without a native integration? Try Zapier!](https://support.rb2b.com/en/articles/9970367-need-to-send-data-from-rb2b-to-a-platform-without-a-native-integration-try-zapier.md)
+- [Zapier FAQs](https://support.rb2b.com/en/articles/9887440-zapier-faqs.md): Frequently asked questions about RB2B's Zapier integration.
+- [Setup Guide: HubSpot CRM](https://support.rb2b.com/en/articles/10138156-setup-guide-hubspot-crm.md)
+- [How RB2B's HubSpot CRM Integration Works](https://support.rb2b.com/en/articles/10138207-how-rb2b-s-hubspot-crm-integration-works.md)
+- [HubSpot Integration: Company and Contact Settings](https://support.rb2b.com/en/articles/10450014-hubspot-integration-company-and-contact-settings.md)
+- [Playbook: Using HubSpot CRM with RB2B](https://support.rb2b.com/en/articles/10223237-playbook-using-hubspot-crm-with-rb2b.md)
+- [Playbook: Setting Up Website Visitor Notifications for Account Owners in HubSpot](https://support.rb2b.com/en/articles/10758414-playbook-setting-up-website-visitor-notifications-for-account-owners-in-hubspot.md)
+- [Playbook: Example Workflows for HubSpot CRM](https://support.rb2b.com/en/articles/10806594-playbook-example-workflows-for-hubspot-crm.md)
+- [Troubleshooting: HubSpot CRM](https://support.rb2b.com/en/articles/11173402-troubleshooting-hubspot-crm.md)
+- [Re-Authenticating or Disconnecting HubSpot CRM](https://support.rb2b.com/en/articles/10138196-re-authenticating-or-disconnecting-hubspot-crm.md)
+- [HubSpot CRM FAQs](https://support.rb2b.com/en/articles/10138613-hubspot-crm-faqs.md): Frequently asked questions about RB2B's HubSpot CRM integration.
+- [Setup Guide: Salesforce CRM](https://support.rb2b.com/en/articles/9072081-setup-guide-salesforce-crm.md)
+- [How RB2B's Salesforce CRM Integration Works](https://support.rb2b.com/en/articles/10495016-how-rb2b-s-salesforce-crm-integration-works.md)
+- [Customizing Your Salesforce CRM Integration](https://support.rb2b.com/en/articles/10494646-customizing-your-salesforce-crm-integration.md)
+- [Playbook: Using Salesforce CRM with RB2B](https://support.rb2b.com/en/articles/10502369-playbook-using-salesforce-crm-with-rb2b.md)
+- [Playbook: Setting Up Website Visitor Notifications for Account Owners in Salesforce](https://support.rb2b.com/en/articles/10706886-playbook-setting-up-website-visitor-notifications-for-account-owners-in-salesforce.md)
+- [Playbook: Example Flows for Salesforce CRM](https://support.rb2b.com/en/articles/10922562-playbook-example-flows-for-salesforce-crm.md)
+- [How to Add "RB2B" to Lead Source and Account Source Picklists in Salesforce](https://support.rb2b.com/en/articles/10502631-how-to-add-rb2b-to-lead-source-and-account-source-picklists-in-salesforce.md)
+- [Re-Authenticating or Disconnecting Salesforce CRM](https://support.rb2b.com/en/articles/10494852-re-authenticating-or-disconnecting-salesforce-crm.md)
+- [Salesforce CRM FAQs](https://support.rb2b.com/en/articles/10502350-salesforce-crm-faqs.md): Frequently asked questions about RB2B's Salesforce CRM integration.
+- [Setup Guide: Slack](https://support.rb2b.com/en/articles/8913193-setup-guide-slack.md)
+- [Playbook: Leveraging Slack with RB2B for Real-Time Visitor Insights](https://support.rb2b.com/en/articles/10265476-playbook-leveraging-slack-with-rb2b-for-real-time-visitor-insights.md)
+- [Getting the Most out of RB2B's Slack Integration](https://support.rb2b.com/en/articles/10175261-getting-the-most-out-of-rb2b-s-slack-integration.md)
+- [Enabling both personal and company-level profiles in Slack](https://support.rb2b.com/en/articles/12092503-enabling-both-personal-and-company-level-profiles-in-slack.md)
+- [Managing Multiple RB2B Slack Integrations with a Single Slack User](https://support.rb2b.com/en/articles/10176683-managing-multiple-rb2b-slack-integrations-with-a-single-slack-user.md)
+- [Enabling / Disabling 'Daily Recap' Message in Slack](https://support.rb2b.com/en/articles/9572132-enabling-disabling-daily-recap-message-in-slack.md)
+- [Slack FAQs](https://support.rb2b.com/en/articles/9805944-slack-faqs.md): Frequently asked questions about RB2B's Slack integration.
+- [Setup Guide: Microsoft Teams](https://support.rb2b.com/en/articles/13438250-setup-guide-microsoft-teams.md)
+- [Setup Guide: Webhook](https://support.rb2b.com/en/articles/8976614-setup-guide-webhook.md)
+- [Setup Guide: Aimfox](https://support.rb2b.com/en/articles/13862318-setup-guide-aimfox.md)
+- [Setup Guide: AutoCRM](https://support.rb2b.com/en/articles/14463578-setup-guide-autocrm.md)
+- [Setup Guide: BetterContact](https://support.rb2b.com/en/articles/9805931-setup-guide-bettercontact.md)
+- [Setup Guide: Growth-X](https://support.rb2b.com/en/articles/10290629-setup-guide-growth-x.md)
+- [Setup Guide: HeyReach](https://support.rb2b.com/en/articles/9887313-setup-guide-heyreach.md)
+- [Setup Guide: Highperformr](https://support.rb2b.com/en/articles/10627612-setup-guide-highperformr.md)
+- [Setup Guide: HireQuotient](https://support.rb2b.com/en/articles/9717405-setup-guide-hirequotient.md)
+- [Setup Guide: Instantly](https://support.rb2b.com/en/articles/9004964-setup-guide-instantly.md)
+- [Setup Guide: La Growth Machine](https://support.rb2b.com/en/articles/11123121-setup-guide-la-growth-machine.md)
+- [Setup Guide: Make.com](https://support.rb2b.com/en/articles/12902333-setup-guide-make-com.md)
+- [Setup Guide: Mixmax](https://support.rb2b.com/en/articles/9809166-setup-guide-mixmax.md)
+- [Setup Guide: Outplay](https://support.rb2b.com/en/articles/12830990-setup-guide-outplay.md)
+- [Setup Guide: Pocus](https://support.rb2b.com/en/articles/13015526-setup-guide-pocus.md)
+- [Setup Guide: Reachfast](https://support.rb2b.com/en/articles/14463703-setup-guide-reachfast.md)
+- [Setup Guide: Reply.io](https://support.rb2b.com/en/articles/9807031-setup-guide-reply-io.md)
+- [Setup Guide: Salesforge](https://support.rb2b.com/en/articles/10767179-setup-guide-salesforge.md)
+- [Setup Guide: Samplead](https://support.rb2b.com/en/articles/9767512-setup-guide-samplead.md)
+- [Setup Guide: Sendspark](https://support.rb2b.com/en/articles/12066682-setup-guide-sendspark.md)
+- [Setup Guide: SmartReach](https://support.rb2b.com/en/articles/9997368-setup-guide-smartreach.md)
+- [Setup Guide: SuperAGI](https://support.rb2b.com/en/articles/9939620-setup-guide-superagi.md)
+- [Setup Guide: Tapistro](https://support.rb2b.com/en/articles/9887318-setup-guide-tapistro.md)
+- [Setup Guide: Warmly](https://support.rb2b.com/en/articles/11757317-setup-guide-warmly.md)
+- [Webhook FAQs](https://support.rb2b.com/en/articles/9806566-webhook-faqs.md): Frequently asked questions about RB2B's Webhook integration and other webbook-based integrations.
+- [Why did my integration stop working?](https://support.rb2b.com/en/articles/9255109-why-did-my-integration-stop-working.md)
+- [How do I disable my \[product\] integration?](https://support.rb2b.com/en/articles/9717655-how-do-i-disable-my-product-integration.md)
+
+## Billing and Plans
+
+- [Managing Your RB2B Plan and Credits](https://support.rb2b.com/en/articles/11185848-managing-your-rb2b-plan-and-credits.md)
+- [How to Estimate the Number of RB2B Credits You'll Need Each Month](https://support.rb2b.com/en/articles/11723887-how-to-estimate-the-number-of-rb2b-credits-you-ll-need-each-month.md)
+- [Why High-Volume Sites Often Need Fewer RB2B Credits Than Expected](https://support.rb2b.com/en/articles/11969212-why-high-volume-sites-often-need-fewer-rb2b-credits-than-expected.md)
+- [Updates to RB2B Billing and Subscription Plans \(January 2026\)](https://support.rb2b.com/en/articles/13285979-updates-to-rb2b-billing-and-subscription-plans-january-2026.md)
+- [RB2B Refund Policy](https://support.rb2b.com/en/articles/11933723-rb2b-refund-policy.md)
+- [Billing and Plans FAQs](https://support.rb2b.com/en/articles/12522106-billing-and-plans-faqs.md)
+- [RB2B Plans Side-By-Side Comparisons](https://support.rb2b.com/en/articles/9173659-rb2b-plans-side-by-side-comparisons.md)
+- [Plans: Pro and Pro+](https://support.rb2b.com/en/articles/8943609-plans-pro-and-pro.md)
+- [Plan: Starter](https://support.rb2b.com/en/articles/13252597-plan-starter.md)
+- [Plan: Clay Agency](https://support.rb2b.com/en/articles/14035372-plan-clay-agency.md)
+- [Plan: Free](https://support.rb2b.com/en/articles/8938455-plan-free.md)
+- [7 Day Trial of Pro+](https://support.rb2b.com/en/articles/9042091-7-day-trial-of-pro.md)
+- [Understanding the RB2B Credit System](https://support.rb2b.com/en/articles/9341254-understanding-the-rb2b-credit-system.md)
+- [Credit FAQs](https://support.rb2b.com/en/articles/10577574-credit-faqs.md): Frequently asked questions about credits and how they work.
+- [Overages FAQs](https://support.rb2b.com/en/articles/10577628-overages-faqs.md): Frequently asked questions about overages and how they work.
+- [Subscription Details Page Overview](https://support.rb2b.com/en/articles/11801797-subscription-details-page-overview.md)
+- [Updating Your Billing Information](https://support.rb2b.com/en/articles/9577541-updating-your-billing-information.md)
+- [Accepted Payment Methods](https://support.rb2b.com/en/articles/9630528-accepted-payment-methods.md)
+- [Canceling or Downgrading Your RB2B Subscription](https://support.rb2b.com/en/articles/14409493-canceling-or-downgrading-your-rb2b-subscription.md)
+
+## Frequently Asked Questions
+
+- [General FAQs](https://support.rb2b.com/en/articles/14838404-general-faqs.md): Frequently asked questions about getting started with RB2B.
+- [Can I schedule a demo of RB2B?](https://support.rb2b.com/en/articles/9200091-can-i-schedule-a-demo-of-rb2b.md)
+- [Reporting Erroneous Data](https://support.rb2b.com/en/articles/9496626-reporting-erroneous-data.md)
+- [Data Collection and Accuracy Insights FAQs](https://support.rb2b.com/en/articles/10921917-data-collection-and-accuracy-insights-faqs.md): Frequently asked questions about RB2B's Data Collection and Accuracy Insights
+- [LinkedIn Data FAQs](https://support.rb2b.com/en/articles/10922041-linkedin-data-faqs.md): Frequently asked questions about RB2B's LinkedIn Data
+- [Geographical Location FAQs](https://support.rb2b.com/en/articles/10922296-geographical-location-faqs.md): Frequently asked questions in relation to geographical location
+- [Profile Data FAQs](https://support.rb2b.com/en/articles/14827019-profile-data-faqs.md): Frequently asked questions about visitor profiles, data collection, data ownership, and how RB2B identifies website visitors.
+- [Technological FAQs](https://support.rb2b.com/en/articles/10922341-technological-faqs.md): Frequently asked questions surrounding technological considerations
+- [Compliance and Data Governance FAQs](https://support.rb2b.com/en/articles/10921800-compliance-and-data-governance-faqs.md): Frequently asked questions related to RB2B's Compliance and Data Governance
+
+## Security and Compliance
+
+- [Understanding Data Encryption in RB2B](https://support.rb2b.com/en/articles/9090248-understanding-data-encryption-in-rb2b.md)
+- [RB2B Cookie Information](https://support.rb2b.com/en/articles/9910029-rb2b-cookie-information.md)
+- [Data Broker Registration](https://support.rb2b.com/en/articles/10580390-data-broker-registration.md)
+- [Ensure GDPR Compliance While Managing Cookie Consent and International Visitor Tracking](https://support.rb2b.com/en/articles/11933759-ensure-gdpr-compliance-while-managing-cookie-consent-and-international-visitor-tracking.md)
+- [Vendor Reviews and Security Assessments: Policy for Trials and Self-Serve Plans](https://support.rb2b.com/en/articles/12861177-vendor-reviews-and-security-assessments-policy-for-trials-and-self-serve-plans.md)
+- [Security FAQs](https://support.rb2b.com/en/articles/8999958-security-faqs.md)
+- [Compliance FAQs](https://support.rb2b.com/en/articles/15589545-compliance-faqs.md)
+
+## Partner Programs
+
+- [RB2B Integration Creator Program](https://support.rb2b.com/en/articles/9483538-rb2b-integration-creator-program.md)
+- [Formatting Your Custom RB2B Integration](https://support.rb2b.com/en/articles/9483979-formatting-your-custom-rb2b-integration.md)
+- [Responding to Webhook Requests](https://support.rb2b.com/en/articles/14300384-responding-to-webhook-requests.md)
+- [Testing Your Custom Built RB2B Integration](https://support.rb2b.com/en/articles/9515592-testing-your-custom-built-rb2b-integration.md)
+- [Submitting Your Custom RB2B Integration for Review](https://support.rb2b.com/en/articles/9483578-submitting-your-custom-rb2b-integration-for-review.md)
+- [Integration Creator Program FAQs](https://support.rb2b.com/en/articles/9888071-integration-creator-program-faqs.md): FAQs about RB2B's Integration Creator Program
+- [Join the RB2B Affiliate Program — Earn Recurring Commission for Every Referral](https://support.rb2b.com/en/articles/11747580-join-the-rb2b-affiliate-program-earn-recurring-commission-for-every-referral.md)
+- [RB2B Agency Program: Manage Multiple Client Accounts with Ease](https://support.rb2b.com/en/articles/11817272-rb2b-agency-program-manage-multiple-client-accounts-with-ease.md)
+- [RB2B Agency Program FAQs](https://support.rb2b.com/en/articles/11822668-rb2b-agency-program-faqs.md)
+- [RB2B's OEM Partner Program](https://support.rb2b.com/en/articles/12579426-rb2b-s-oem-partner-program.md)
+- [OEM Account Billing Configuration](https://support.rb2b.com/en/articles/13334698-oem-account-billing-configuration.md)
+- [Using the RB2B OEM Program: API & Webhook Guide](https://support.rb2b.com/en/articles/12880800-using-the-rb2b-oem-program-api-webhook-guide.md)
+- [Installing Your RB2B OEM Tracking Script](https://support.rb2b.com/en/articles/12881892-installing-your-rb2b-oem-tracking-script.md)
+
+## Service Updates & Announcements
+
+- [Changelog](https://support.rb2b.com/en/articles/10442291-changelog.md): Keep up-to-date with the latest updates and changes within the RB2B platform.
+- [Service Interruptions](https://support.rb2b.com/en/articles/14047483-service-interruptions.md): If there are any current interruptions in service, this page will be updated will information.
+- [Feature Requests](https://support.rb2b.com/en/articles/11012656-feature-requests.md)
+- [Free Plan: Slack Notification Pause on January 28, 2026](https://support.rb2b.com/en/articles/13551653-free-plan-slack-notification-pause-on-january-28-2026.md)

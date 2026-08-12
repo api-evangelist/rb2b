@@ -1,0 +1,154 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://www.rb2b.com/pricing (platform plans, read 2026-08-12),
+  https://ui.api.rb2b.com/signup (API Partner Program credit pack),
+  https://www.npmjs.com/package/@rb2b/rb2b-apis-mcp (per-endpoint credit costs,
+  published by RB2B in its own MCP server).
+provider: RB2B
+providerId: rb2b
+description: >-
+  RB2B prices two different things two different ways. The visitor-identification
+  PLATFORM is a four-tier monthly subscription metered in "resolutions" with a
+  published per-resolution overage rate. The API PARTNER PROGRAM — the
+  Identity/Enrichment API at api.rb2b.com — is not tiered at all: it is a
+  standalone account with a prepaid credit balance, entered through a $9 / 100
+  credit starter pack, where each endpoint costs 1-4 credits per successful
+  call. No volume pricing, credit-pack ladder, or enterprise tier is published
+  for the API; the OEM Partner Program is sales-gated with no published price.
+plan_count: 5
+currency: USD
+plans:
+  - id: rb2b-free
+    name: Free
+    surface: platform
+    price: 0
+    currency: USD
+    period: month
+    included:
+      metric: resolutions
+      quantity: 150
+      window: month
+    overage: null
+    features:
+      - Basic Resolution
+      - Company-level identification
+      - Push to Slack
+      - 7-day full-featured trial
+    limits:
+      - No person-level identification
+      - No email addresses
+      - No integrations beyond Slack
+  - id: rb2b-starter
+    name: Starter
+    surface: platform
+    price: 79
+    currency: USD
+    period: month
+    included:
+      metric: resolutions
+      quantity: 300
+      window: month
+    overage:
+      price: 0.45
+      unit: resolution
+    features:
+      - Basic Resolution
+      - Push LinkedIn URLs to Slack and Microsoft Teams
+    limits:
+      - No email addresses
+      - No integrations other than Slack / Teams
+  - id: rb2b-pro
+    name: Pro
+    surface: platform
+    price: 149
+    price_note: starting price; scales with resolution volume up to 2,500/month
+    currency: USD
+    period: month
+    included:
+      metric: resolutions
+      quantity: 600
+      window: month
+    overage:
+      price: 0.25
+      unit: resolution
+    features:
+      - Basic Resolution
+      - LinkedIn URLs
+      - Business email addresses
+      - All integrations
+    add_ons:
+      - {name: Additional domains, price: 99, currency: USD, period: month, note: up to 5}
+  - id: rb2b-pro-plus
+    name: Pro+
+    surface: platform
+    price: 199
+    price_note: starting price; most popular tier; scales with resolution volume
+    currency: USD
+    period: month
+    included:
+      metric: resolutions
+      quantity: 600
+      window: month
+    overage:
+      price: 0.25
+      unit: resolution
+    features:
+      - Premium Resolution
+      - LinkedIn URLs
+      - Business email addresses
+      - All integrations
+    add_ons:
+      - {name: Additional domains, price: 99, currency: USD, period: month, note: up to 5}
+  - id: rb2b-api-partner-credits
+    name: API Partner Program — prepaid credits
+    surface: api
+    price: 9
+    currency: USD
+    period: one-time
+    included:
+      metric: credits
+      quantity: 100
+      window: prepaid
+    overage: null
+    signup: https://ui.api.rb2b.com/signup
+    features:
+      - Standalone API account with a single credit balance shared across all Identity/Enrichment endpoints
+      - Operates independently from the consumer platform account at app.rb2b.com
+    limits:
+      - No published credit-pack ladder, volume pricing, or enterprise tier beyond the $9 starter pack.
+    credit_costs:
+      note: >-
+        Per-successful-call cost, published by RB2B in its own MCP server
+        package. Free tools make no upstream metered call.
+      free: [help, check_credits, set_api_key]
+      one_credit:
+        - ip_to_company
+        - ip_to_hem
+        - ip_to_maid
+        - email_to_linkedin_slug
+        - email_to_best_linkedin
+        - email_to_maid
+        - hem_to_linkedin_slug
+        - hem_to_best_linkedin
+        - hem_to_maid
+        - linkedin_to_hashed_emails
+        - linkedin_to_best_personal_email
+        - linkedin_to_personal_email
+      two_credits: [email_to_business_profile, hem_to_business_profile]
+      three_credits: [linkedin_to_mobile_phone]
+      four_credits: [linkedin_to_business_profile]
+unpriced_surfaces:
+  - name: OEM Partner Program
+    url: https://support.rb2b.com/en/articles/12579426-rb2b-s-oem-partner-program
+    pricing: not published — enrolment and billing are configured with RB2B
+    note: >-
+      OEM accounts have their own billing configuration article and a
+      credit_usage endpoint, but no public rate card.
+  - name: Agency Program
+    url: https://support.rb2b.com/en/articles/11817272-rb2b-agency-program-manage-multiple-client-accounts-with-ease
+    pricing: not published
+free_tier: true
+trial: true
+trial_note: 7-day full-featured trial on the Free plan.
+enterprise_contact_only: false

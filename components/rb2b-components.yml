@@ -1,0 +1,73 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://support.rb2b.com/en/articles/10126115-installing-your-rb2b-tracking-script
+  and the RB2B install guide collection
+  (https://support.rb2b.com/en/collections/7815667-script-installation),
+  including the Next.js guide which publishes the CloudFront loader URL verbatim.
+description: >-
+  RB2B ships exactly one client-side component: the browser tracking pixel. It
+  is not a UI component library — it renders nothing — but it is the primary
+  data-ingestion surface for the whole platform, distributed as a per-account
+  JavaScript bundle from CloudFront and installed through a large set of
+  first-party platform guides and one first-party CMS plugin.
+families:
+  pixel:
+    description: >-
+      The RB2B tracking script. A snippet defines a global `reb2b` object with
+      `identify` and `collect` methods, sets
+      `reb2b.SNIPPET_VERSION = "1.0.1"`, and calls
+      `reb2b.load("<ACCOUNT_ID>")`, which asynchronously injects the
+      per-account bundle. Recommended placement is immediately before the
+      closing </head> tag; the script loads asynchronously so it does not block
+      rendering.
+    components:
+      - name: RB2B tracking script (reb2b)
+        id: reb2b
+        global: reb2b
+        methods: [identify, collect, load]
+        loader_url: https://ddwl4m2hdecbv.cloudfront.net/b/{account_id}/{account_id}.js.gz
+        snippet_version: '1.0.1'
+        snippet_source: https://app.rb2b.com/script/setup_script_html
+        verification: >-
+          Type `reb2b` in the browser console; it returns an object with
+          installation and account status indicators. The dashboard also runs an
+          Installation Debugger (beta).
+        note: >-
+          The URL embeds the account ID and carries no version, so the served
+          bundle floats. See packages/rb2b-packages.yml.
+      - name: RB2B OEM tracking script
+        id: reb2b-oem
+        source: https://app.rb2b.com/oem_dashboard
+        docs: https://support.rb2b.com/en/articles/12881892-installing-your-rb2b-oem-tracking-script
+        note: >-
+          Bespoke per-partner build. Only collects on domains registered through
+          the OEM Domain Management API, and cannot run on the same site as the
+          standard script — one or the other, never both.
+  install_targets:
+    description: >-
+      First-party installation guides. These are integration recipes rather than
+      distinct components — the same pixel in each case.
+    tag_managers: [Google Tag Manager, Segment, RudderStack]
+    cms_and_builders: [WordPress, Wix, Webflow, Squarespace, Framer, Shopify, Tilda, Kajabi, Unbounce, HubSpot CMS]
+    frameworks: [Next.js, React.js, Angular, TypeScript, raw HTML]
+    plugin:
+      name: RB2B WordPress Plugin
+      url: https://github.com/robbclarke/RB2B-WordPress-Plugin
+      note: First-party; injects the snippet into the WordPress global header. Catalogued in packages/rb2b-packages.yml.
+  dashboard_tools:
+    description: Account-side tooling that supports the component, not embeddable itself.
+    components:
+      - name: Installation Debugger (beta)
+        docs: https://support.rb2b.com/en/articles/13868904-installation-debugger-beta-identify-and-fix-rb2b-script-issues-faster
+        note: >-
+          Diagnoses script issues including consent-manager interference; the
+          2026-07-20 changelog entry added detection for CookieYes being present
+          but offline.
+constraints:
+  - Consent managers and cookie-acceptance policies materially affect collection; RB2B documents GTM consent gating.
+  - Script-delay optimisers break identification — RB2B specifically documents WP Rocket's "Delay JavaScript Execution".
+  - Single-page apps must re-run the loader on each client-side navigation (documented in the Next.js guide).
+not_present:
+  - No embeddable UI/element library, no web components, no hosted or prebuilt visual surface.
+  - No embedded dashboard or iframe surface for partners.

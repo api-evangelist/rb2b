@@ -10,25 +10,32 @@ description: >-
   Salesforce, HubSpot, Clay, Zapier, Apollo, Customer.io, Demandbase, and
   others), with global company-level identification and US-only person-
   level resolution. RB2B operates a separate API Partner Program at
-  api.rb2b.com that exposes credit-metered Identification endpoints
-  (IP → HEM, IP → MAID, IP → Company Domain) and Enrichment endpoints
-  (HEM → LinkedIn, HEM → Business Profile, HEM → MAID, LinkedIn → Email,
-  LinkedIn → Phone, Email → LinkedIn, Email → MAID) for SaaS developers,
-  GTM engineers, retailers, and ad-tech platforms that want to embed
-  identity resolution into their own apps and identity graphs. The platform
-  is SOC 2 Type II certified.
+  api.rb2b.com/api/v1 that exposes credit-metered Identification endpoints
+  (IP → Company, IP → HEM, IP → MAID) and Enrichment endpoints
+  (HEM/Email → LinkedIn, HEM/Email → Business Profile, HEM/Email → MAID,
+  LinkedIn → Hashed Emails, LinkedIn → Personal Email, LinkedIn → Mobile
+  Phone, LinkedIn → Business Profile) for SaaS developers, GTM engineers,
+  retailers, and ad-tech platforms that want to embed identity resolution
+  into their own apps and identity graphs. A separate OEM Partner API at
+  app.rb2b.com/api/v1 manages authorized domains and credit usage for
+  partners embedding RB2B in their own products. RB2B publishes no OpenAPI;
+  the only machine-readable description of its API is its own first-party
+  MCP server, @rb2b/rb2b-apis-mcp, which exposes 19 tools over the same
+  endpoints. The platform is SOC 2 Type 2 certified and CCPA compliant.
 type: Index
 accessModel:
-  pricing: unknown
-  onboarding: approval
-  trial: false
+  pricing: freemium
+  onboarding: self-service
+  trial: true
   try_now: false
-  public: false
-  label: Requires approval
-  confidence: medium
-  source: []
-  generated: '2026-07-22'
-  method: derived
+  public: true
+  label: Free plan plus paid tiers; API credits sold separately
+  confidence: high
+  source:
+    - https://www.rb2b.com/pricing
+    - https://ui.api.rb2b.com/signup
+  generated: '2026-08-12'
+  method: searched
 position: Provider
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/rb2b.png
@@ -48,9 +55,10 @@ tags:
   - Pixel
   - Adtech
   - Identity Graph
+  - MCP
 url: https://raw.githubusercontent.com/api-evangelist/rb2b/refs/heads/main/apis.yml
 created: '2026-05-25'
-modified: '2026-05-25'
+modified: '2026-08-12'
 specificationVersion: '0.20'
 apis:
 - aid: rb2b:rb2b-identification-api
@@ -62,24 +70,36 @@ apis:
     - Hashed Email
     - Mobile Ad ID
     - B2B Data
-  humanURL: https://www.rb2b.com/apis
+  humanURL: https://ui.api.rb2b.com
+  baseURL: https://api.rb2b.com/api/v1
   description: >-
     Credit-metered Identification endpoints that convert anonymous web
-    signals (IP addresses and user agents) into business identifiers,
-    including IP → HEM (hashed email), IP → MAID (mobile ad ID), and
-    IP → Company Domain. Hosted on api.rb2b.com and accessed through the
-    RB2B API Partner Program with its own account, credit balance, and
-    Postman-based documentation. Person-level resolution is US-only;
-    company-level resolution is global.
+    signals (IP addresses) into business identifiers — POST /ip_to_company,
+    POST /ip_to_hem (hashed email, ranked by confidence) and POST /ip_to_maid
+    (mobile ad ID). Hosted on api.rb2b.com and accessed through the RB2B API
+    Partner Program with its own standalone account, credit balance and
+    Api-Key header. Person-level resolution is US-only; company-level
+    resolution is global.
   properties:
-    - url: https://www.rb2b.com/apis
-      type: Documentation
-    - url: https://postman.api.rb2b.com/
-      type: Postman
-    - url: https://ui.api.rb2b.com/login
+    - url: https://ui.api.rb2b.com
       type: Portal
-    - url: https://support.rb2b.com/en/articles/12579420-rb2b-s-api-partner-program
-      type: Signup
+    - url: https://support.rb2b.com/en/
+      type: Documentation
+    - url: https://ui.api.rb2b.com/signup
+      type: SignUp
+    - url: https://www.npmjs.com/package/@rb2b/rb2b-apis-mcp
+      type: MCPServer
+  x-evidence:
+    verified: '2026-08-12'
+    method: live probe
+    checks:
+      - 'GET https://api.rb2b.com/api/v1/credits → 401 {"error":"missing_api_key"}'
+      - 'POST https://api.rb2b.com/api/v1/ip_to_company → 401 {"error":"missing_api_key"}'
+    contract_source: >-
+      Endpoint paths and request bodies read from the provider's own published
+      MCP server, @rb2b/rb2b-apis-mcp 1.1.7 (dist/api.js). No OpenAPI is
+      published — /openapi.json, /openapi.yaml, /swagger.json, /v1/openapi.json,
+      /api-docs, /docs and /redoc all 404 on api.rb2b.com.
 - aid: rb2b:rb2b-enrichment-api
   name: RB2B Enrichment API
   tags:
@@ -89,22 +109,71 @@ apis:
     - Phone
     - Business Profile
     - B2B Data
-  humanURL: https://www.rb2b.com/apis
+  humanURL: https://ui.api.rb2b.com
+  baseURL: https://api.rb2b.com/api/v1
   description: >-
-    Credit-metered Enrichment endpoints that take a known identifier
-    (hashed email, LinkedIn URL, plaintext email, MAID, or company domain)
-    and return additional B2B attributes — LinkedIn URL, full business
-    profile, multiple personal or business emails, phone number, MAID, and
-    firmographics. Designed for SaaS developers, GTM engineers, and ad-tech
-    platforms that want to enrich their own identity graphs. Hosted on
-    api.rb2b.com and accessed through the RB2B API Partner Program.
+    Credit-metered Enrichment endpoints that take a known identifier — hashed
+    email (MD5), plaintext email, or LinkedIn slug — and return additional B2B
+    attributes: POST /hem_to_linkedin, /hem_to_best_linkedin,
+    /hem_to_business_profile and /hem_to_maid (each accepting either an `md5`
+    or an `email` key), plus /linkedin_to_hashed_emails,
+    /linkedin_to_best_personal_email, /linkedin_to_personal_email,
+    /linkedin_to_mobile_phone and /linkedin_to_business_profile. Costs run 1–4
+    credits per successful call. Designed for SaaS developers, GTM engineers
+    and ad-tech platforms enriching their own identity graphs. Shares the
+    api.rb2b.com host, account and credit balance with the Identification API.
   properties:
-    - url: https://www.rb2b.com/apis
-      type: Documentation
-    - url: https://postman.api.rb2b.com/
-      type: Postman
-    - url: https://ui.api.rb2b.com/login
+    - url: https://ui.api.rb2b.com
       type: Portal
+    - url: https://support.rb2b.com/en/
+      type: Documentation
+    - url: https://ui.api.rb2b.com/signup
+      type: SignUp
+    - url: https://www.npmjs.com/package/@rb2b/rb2b-apis-mcp
+      type: MCPServer
+  x-evidence:
+    verified: '2026-08-12'
+    method: live probe
+    checks:
+      - 'POST https://api.rb2b.com/api/v1/ip_to_company with a malformed key → 401 {"error":"invalid_api_key_format"}'
+    contract_source: >-
+      Endpoint paths, request-body keys and per-call credit costs read verbatim
+      from @rb2b/rb2b-apis-mcp 1.1.7; captured in mcp/rb2b-mcp-tools.json and
+      mcp/rb2b-tool-crosswalk.yml.
+- aid: rb2b:rb2b-oem-partner-api
+  name: RB2B OEM Partner API
+  tags:
+    - OEM
+    - Domain Management
+    - Partner
+    - Usage
+    - Billing
+  humanURL: https://support.rb2b.com/en/articles/12880800-using-the-rb2b-oem-program-api-webhook-guide
+  baseURL: https://app.rb2b.com/api/v1
+  description: >-
+    The domain-management and usage API for RB2B OEM partners embedding RB2B
+    identification inside their own platforms — POST /add_domain, POST
+    /delete_domain, GET /domains and GET /credit_usage, authenticated with an
+    Api-Key header issued on the OEM dashboard. The API is the ONLY supported
+    way to authorize a domain: RB2B ignores traffic from any domain not added
+    here, even when the OEM tracking script is installed. Credit usage returns
+    credits_used with the last and next billing dates.
+  properties:
+    - url: https://support.rb2b.com/en/articles/12880800-using-the-rb2b-oem-program-api-webhook-guide
+      type: Documentation
+    - url: https://support.rb2b.com/en/articles/12579426-rb2b-s-oem-partner-program
+      type: SignUp
+    - url: https://app.rb2b.com/oem_dashboard
+      type: Portal
+  x-evidence:
+    verified: '2026-08-12'
+    method: live probe
+    checks:
+      - 'GET https://app.rb2b.com/api/v1/domains → 401 {"error":"missing_api_key"}'
+      - 'GET https://app.rb2b.com/api/v1/credit_usage → 401 {"error":"missing_api_key"}'
+    contract_source: >-
+      Endpoints, request bodies and response shapes documented verbatim by RB2B
+      in the OEM API & Webhook Guide.
 - aid: rb2b:rb2b-pixel-webhooks
   name: RB2B Pixel and Destination Webhooks
   tags:
@@ -113,45 +182,67 @@ apis:
     - Webhooks
     - Integrations
     - Tag Manager
-  humanURL: https://support.rb2b.com/en/
+  humanURL: https://support.rb2b.com/en/collections/7815667-script-installation
+  baseURL: https://ddwl4m2hdecbv.cloudfront.net
   description: >-
     The RB2B JavaScript pixel installed in a site header (or via Google
     Tag Manager / Segment / RudderStack / Shopify / Webflow / WordPress /
-    HubSpot CMS / Wix) is the primary data ingestion surface for RB2B.
-    Resolved visitors are pushed downstream through a webhook and
-    destination layer that fan out to 50+ ad, CRM, marketing-automation,
-    enrichment, and orchestration tools — Slack, Microsoft Teams,
-    Salesforce, HubSpot, Clay, Zapier, Customer.io, Apollo, Demandbase,
-    Google Ads, Meta Ads, LinkedIn Ads, Webhook URLs, and others — based
-    on the customer's tier and configuration.
+    HubSpot CMS / Wix / Next.js / React / Angular) is the primary data
+    ingestion surface for RB2B. The snippet defines a global `reb2b` object
+    and loads a per-account bundle from
+    https://ddwl4m2hdecbv.cloudfront.net/b/{account_id}/{account_id}.js.gz.
+    Resolved visitors are pushed downstream through an outbound webhook and
+    destination layer that fans out to 50+ ad, CRM, marketing-automation,
+    enrichment and orchestration tools — Slack, Microsoft Teams, Salesforce,
+    HubSpot, Clay, Zapier, n8n, Make.com, Apollo, Instantly, Smartlead,
+    Warmly, Pocus, Webhook URLs and others — based on the customer's tier and
+    configuration. The webhook payload is a fixed, unsigned, non-customizable
+    JSON object; a non-200 or a response slower than 15 seconds disconnects
+    the integration.
   properties:
-    - url: https://support.rb2b.com/en/
+    - url: https://support.rb2b.com/en/collections/7815667-script-installation
+      type: GettingStarted
+    - url: https://support.rb2b.com/en/articles/8976614-setup-guide-webhook
       type: Documentation
+    - url: asyncapi/rb2b-webhooks.yml
+      type: Webhooks
+    - url: components/rb2b-components.yml
+      type: Components
     - url: https://support.rb2b.com/en/articles/9061641-setup-guide-apollo-io
       type: IntegrationGuide
+    - url: https://support.rb2b.com/en/articles/9483538-rb2b-integration-creator-program
+      type: PartnerProgram
 common:
-  - type: TrustCenter
-    url: security/rb2b-trust-center.yml
-  - type: DomainSecurity
-    url: security/rb2b-domain-security.yml
   - type: Website
     url: https://www.rb2b.com
-  - type: Pricing
-    url: https://www.rb2b.com/pricing
-  - type: Partner
-    url: https://www.rb2b.com/partner
+  - type: Documentation
+    url: https://support.rb2b.com/en/
   - type: Support
     url: https://support.rb2b.com/en/
-  - type: APIs
-    url: https://www.rb2b.com/apis
-  - type: APIPortal
+  - type: GettingStarted
+    url: https://support.rb2b.com/en/collections/7815667-script-installation
+  - type: Blog
+    url: https://www.rb2b.com/blogs
+  - type: Pricing
+    url: https://www.rb2b.com/pricing
+  - type: SignUp
+    url: https://ui.api.rb2b.com/signup
+  - type: Login
     url: https://ui.api.rb2b.com/login
-  - type: APIDocumentation
-    url: https://postman.api.rb2b.com/
+  - type: TermsOfService
+    url: https://www.rb2b.com/terms-conditions
+  - type: PrivacyPolicy
+    url: https://www.rb2b.com/privacy-policy
+  - type: Partner
+    url: https://www.rb2b.com/partner
+  - type: APIs
+    url: https://retention.com/apis
+  - type: APIPortal
+    url: https://ui.api.rb2b.com
   - type: APIPartnerProgram
-    url: https://support.rb2b.com/en/articles/12579420-rb2b-s-api-partner-program
-  - type: APICollections
-    url: https://support.rb2b.com/en/collections/16023167-api-partner-program
+    url: https://support.rb2b.com/en/articles/12579426-rb2b-s-oem-partner-program
+  - type: Library
+    url: https://library.rb2b.com
   - type: Contact
     url: mailto:support@rb2b.com
   - type: Twitter
@@ -160,6 +251,80 @@ common:
     url: https://www.linkedin.com/company/rb2b
   - type: Instagram
     url: https://www.instagram.com/retentiondotcom/
+  - type: LLMsTxt
+    url: llms/rb2b-llms.txt
+  - type: MCPServer
+    url: mcp/rb2b-mcp.yml
+  - type: ToolCrosswalk
+    url: mcp/rb2b-tool-crosswalk.yml
+  - type: Packages
+    url: packages/rb2b-packages.yml
+  - type: SDKs
+    url: packages/rb2b-packages.yml
+  - type: CLI
+    url: cli/rb2b-cli.yml
+  - type: Authentication
+    url: authentication/rb2b-authentication.yml
+  - type: ErrorCatalog
+    url: errors/rb2b-error-codes.yml
+  - type: Conventions
+    url: conventions/rb2b-conventions.yml
+  - type: RateLimits
+    url: rate-limits/rb2b-rate-limits.yml
+  - type: Plans
+    url: plans/rb2b-plans-pricing.yml
+  - type: Lifecycle
+    url: lifecycle/rb2b-lifecycle.yml
+  - type: ChangeLog
+    url: changelog/rb2b-changelog.yml
+  - type: ChangeLog
+    url: https://support.rb2b.com/en/articles/10442291-changelog
+  - type: Conformance
+    url: conformance/rb2b-conformance.yml
+  - type: Compliance
+    url: conformance/rb2b-conformance.yml
+  - type: Webhooks
+    url: asyncapi/rb2b-webhooks.yml
+  - type: Components
+    url: components/rb2b-components.yml
+  - type: DataModel
+    url: data-model/rb2b-data-model.yml
+  - type: AgentSkill
+    url: skills/_index.yml
+  - type: TrustCenter
+    url: security/rb2b-trust-center.yml
+  - type: DomainSecurity
+    url: security/rb2b-domain-security.yml
 maintainers:
   - FN: Kin Lane
     email: kin@apievangelist.com
+x-enrichment:
+  date: '2026-08-12'
+  status: enriched
+  artifacts_added: 23
+  pass: local-v1
+x-broken-links-removed:
+  checked: '2026-08-12'
+  note: >-
+    Three pointers carried by the previous revision no longer resolve and were
+    removed rather than left asserting a surface RB2B does not serve.
+  links:
+    - url: https://postman.api.rb2b.com/
+      was: APIDocumentation
+      status: 404
+      detail: The host now returns a Postman "Not found" page. RB2B publishes no Postman collection.
+    - url: https://support.rb2b.com/en/articles/12579420-rb2b-s-api-partner-program
+      was: Signup
+      status: 404
+      detail: >-
+        The API Partner Program article is gone; its parent collection
+        (https://support.rb2b.com/en/collections/16023167-api-partner-program)
+        returns 401. The program documentation has been taken private since the
+        previous pass.
+    - url: https://www.rb2b.com/apis
+      was: Documentation / humanURL
+      status: 301
+      detail: >-
+        301-redirects to https://retention.com/apis, the sibling brand's API
+        page, which lists product names only — no hosts, endpoints, auth or
+        pricing. The APIs pointer now names the redirect target directly.

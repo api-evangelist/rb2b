@@ -1,0 +1,64 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://www.npmjs.com/package/@rb2b/rb2b-apis-mcp — RB2B's own published MCP
+  server states "Rate limit: 50 requests/second per endpoint" in its README and
+  repeats it verbatim in every paid tool description; dist/api.js maps HTTP 429
+  to that message.
+provider: RB2B
+providerId: rb2b
+description: >-
+  RB2B publishes exactly one rate limit, and it is published inside an npm
+  package rather than on a documentation site: 50 requests per second per
+  endpoint on the Identity / Enrichment API. No limit is published for the OEM
+  Partner API. No RateLimit-* / X-RateLimit-* / Retry-After header was observed
+  on any response, so a client has no runtime signal — only the documented
+  number and a 429 when it is crossed. The real throughput constraint in
+  practice is the prepaid credit balance, not the per-second ceiling.
+limit_count: 1
+headers:
+  rate_limit: none observed
+  remaining: none observed
+  reset: none observed
+  retry_after: none observed
+  request_id: x-request-id
+  note: >-
+    Headers were read from live 401 responses on 2026-08-12
+    (api.rb2b.com/api/v1/credits, app.rb2b.com/api/v1/credit_usage,
+    app.rb2b.com/api/v1/domains). Only x-request-id and x-runtime appear
+    alongside the standard security headers. An authenticated 2xx was not
+    exercised, so the absence is recorded as "none observed on the responses
+    available to an anonymous client", not as a proof for all responses.
+response_codes:
+  throttled: 429
+limits:
+  - name: Identity / Enrichment API requests
+    surface: https://api.rb2b.com/api/v1
+    scope: per-endpoint
+    metric: requests_per_second
+    limit: 50
+    burst: null
+    window: second
+    applies_to: all Identity and Enrichment endpoints
+    source: https://www.npmjs.com/package/@rb2b/rb2b-apis-mcp
+  - name: OEM Partner API requests
+    surface: https://app.rb2b.com/api/v1
+    scope: unknown
+    metric: null
+    limit: null
+    window: null
+    source: null
+    note: >-
+      No rate limit is published for add_domain, delete_domain, domains or
+      credit_usage. Recorded as an honest gap.
+quota:
+  model: prepaid credits
+  note: >-
+    Credits, not requests, are the binding constraint. Each successful Identity
+    call costs 1-4 credits; the balance is readable at GET /credits and the
+    account is refused when it runs out. Platform plans meter "resolutions" per
+    month with per-resolution overage — see plans/rb2b-plans-pricing.yml.
+gaps:
+  - Rate limit is documented only inside an npm package, not on any RB2B web page.
+  - No RateLimit-*/Retry-After headers, so clients cannot pace from the response.
+  - No published limit at all for the OEM Partner API.

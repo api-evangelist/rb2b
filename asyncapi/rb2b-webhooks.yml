@@ -1,0 +1,127 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://support.rb2b.com/en/articles/8976614-setup-guide-webhook,
+  https://support.rb2b.com/en/articles/9806566-webhook-faqs,
+  https://support.rb2b.com/en/articles/14300384-responding-to-webhook-requests,
+  https://support.rb2b.com/en/articles/9483979-formatting-your-custom-rb2b-integration,
+  https://support.rb2b.com/en/articles/12880800-using-the-rb2b-oem-program-api-webhook-guide.
+description: >-
+  RB2B's event surface is outbound webhooks only. There is no AsyncAPI document,
+  no event catalogue, no subscription API, and no inbound stream — RB2B pushes a
+  single fixed-shape JSON payload to one customer-supplied URL as visitors are
+  identified. Two variants exist: the standard destination webhook (one
+  identification per visitor) and the OEM webhook (every page view on an
+  authorised domain). This artifact captures the webhook contract verbatim from
+  RB2B's own documentation; no AsyncAPI is generated, because RB2B publishes
+  none.
+asyncapi_published: false
+event_catalog_published: false
+channels:
+  - name: destination-webhook
+    direction: outbound
+    transport: HTTPS POST
+    configuration_url: https://app.rb2b.com/integrations/webhook
+    docs: https://support.rb2b.com/en/articles/8976614-setup-guide-webhook
+    trigger: A website visitor is identified by the RB2B tracking script.
+    endpoint_requirements:
+      - Must be a single self-contained HTTPS URL.
+      - Custom request headers are not supported; any authentication must be embedded in the URL as query parameters.
+      - Custom request body content is not supported.
+    limits:
+      - One webhook destination per RB2B account (one integration connection per account).
+      - Multiple RB2B accounts may push to the same webhook URL.
+    settings:
+      - {name: Sync company-only profiles, effect: also send company-level (non person-level) identifications}
+      - {name: Send repeat visitor data, effect: send every subsequent visit by an already-identified visitor}
+  - name: oem-webhook
+    direction: outbound
+    transport: HTTPS POST
+    configuration_url: https://app.rb2b.com/oem_dashboard
+    docs: https://support.rb2b.com/en/articles/12880800-using-the-rb2b-oem-program-api-webhook-guide
+    trigger: Every page view on a domain authorised through the OEM Domain Management API.
+    note: >-
+      Higher volume than the standard webhook — "RB2B will begin sending every
+      page view from your added domains to this URL in real time." Adds an
+      optional customer_id passthrough set on the OEM tracking script.
+payload:
+  content_type: application/json
+  customizable: false
+  customizable_note: >-
+    "The webhook payload is not customizable. RB2B sends a fixed set of fields
+    with every request… Field names, structure, and delivery format cannot be
+    modified." Field names contain spaces and are Title Case, which most schema
+    validators and CRM mappers do not accept without remapping.
+  fields:
+    - {name: LinkedIn URL, type: string, format: uri, nullable: false, required: true}
+    - {name: First Name, type: string, nullable: true, required: true}
+    - {name: Last Name, type: string, nullable: true}
+    - {name: Title, type: string, nullable: true}
+    - {name: Company Name, type: string, nullable: true}
+    - {name: Business Email, type: string, format: email, nullable: true}
+    - {name: Website, type: string, format: uri, nullable: true}
+    - {name: Industry, type: string, nullable: true}
+    - {name: Employee Count, type: [integer, string], nullable: true}
+    - {name: Estimate Revenue, type: string, nullable: true}
+    - {name: City, type: string, nullable: false}
+    - {name: State, type: string, nullable: false}
+    - {name: Zipcode, type: string, nullable: false}
+    - {name: Seen At, type: string, format: date-time, nullable: false, note: ISO 8601}
+    - {name: Referrer, type: string, format: uri, nullable: true}
+    - {name: Captured URL, type: string, format: uri, nullable: false}
+    - {name: Tags, type: string, nullable: true, note: comma-separated, e.g. "Hot Pages, Hot Leads"}
+    - {name: customer_id, type: string, nullable: true, note: OEM webhook only; value set on the OEM tracking script}
+  required_fields: ["LinkedIn URL", "First Name"]
+  required_note: Some, but not all, fields must be populated for the payload to send.
+  sample_source: https://support.rb2b.com/en/articles/8976614-setup-guide-webhook
+delivery:
+  expected_response: HTTP 200 OK
+  timeout_seconds: 15
+  retries: none documented
+  failure_behavior: >-
+    Any response other than 200 — including 4xx, 5xx, and no response within 15
+    seconds — is treated as the endpoint being offline and DISCONNECTS the
+    integration. Repeated failures disable the webhook and email the account
+    owner; it must be re-enabled by hand in RB2B settings.
+  response_body: >-
+    Ignored. "Your response body can be empty or contain a simple JSON
+    acknowledgement — RB2B does not parse or act on the response body at this
+    time."
+  ordering: not documented
+  at_least_once: false
+  at_least_once_note: >-
+    With no retries and a disconnect-on-first-failure policy, delivery is at
+    most once. A receiver that blips loses the events AND the integration.
+security:
+  signature: none
+  shared_secret: none
+  mtls: false
+  ip_allowlist: not published
+  authentication_guidance: >-
+    RB2B instructs integrators to place any authentication or identification
+    parameters directly in the webhook URL as query parameters, because the
+    system will not attach custom headers.
+  assessment: >-
+    Unsigned, unauthenticated inbound POSTs of person-level PII — names, business
+    emails, LinkedIn URLs, employer and location — to a URL whose only secret is
+    the URL itself. A receiver cannot verify that a payload came from RB2B.
+compatible_platforms:
+  note: RB2B publishes an illustrative, explicitly non-exhaustive list of webhook-receiving platforms.
+  crm: [GoHighLevel, ActiveCampaign, Keap, Zoho CRM, Pipedrive, Close CRM]
+  sales_engagement: [Outreach, Salesloft, Klenty, Lemlist, Dripify]
+  linkedin_outreach: [Expandi, Waalaxy, Phantombuster]
+  ipaas: [Pabbly Connect, Integrately, KonnectzIT, Activepieces]
+  marketing_automation: [Klaviyo, Brevo, Marketo]
+integration_creator_program:
+  url: https://support.rb2b.com/en/articles/9483538-rb2b-integration-creator-program
+  note: >-
+    Third parties can list a native RB2B integration by exposing a single
+    webhook-receiving URL and submitting it for review. The payload they receive
+    is the same fixed shape documented above.
+gaps:
+  - No AsyncAPI document and no event catalogue.
+  - No webhook signature or shared secret.
+  - No retries and no dead-letter — a single failure disconnects the integration.
+  - Payload field names use spaces and Title Case, forcing a remap at every receiver.
+  - Only one webhook destination per account.
+  - The payload schema is not versioned and changes are not recorded in the changelog.

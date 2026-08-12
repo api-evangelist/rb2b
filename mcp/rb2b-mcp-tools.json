@@ -1,0 +1,294 @@
+{
+  "tools": [
+    {
+      "name": "set_api_key",
+      "description": "Update the RB2B API key. The new key is validated before saving and takes effect immediately. Cost: free. Don't have an API key? Sign up at https://ui.api.rb2b.com.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "api_key": {
+            "type": "string",
+            "description": "The new RB2B API key to save"
+          }
+        },
+        "required": [
+          "api_key"
+        ]
+      }
+    },
+    {
+      "name": "help",
+      "description": "List all available RB2B MCP tools with descriptions, required inputs, and credit costs. Use this to discover what the RB2B MCP server can do. Cost: free.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "check_credits",
+      "description": "Check the remaining API credits for the current RB2B account. Use this to verify the API key is valid or monitor usage. Cost: free.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {},
+        "required": []
+      }
+    },
+    {
+      "name": "ip_to_company",
+      "description": "Identify the company associated with a given IP address. Useful for de-anonymizing website visitors by their IP. Cost: 1 credit. Rate limit: 50 requests/second per endpoint.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ip_address": {
+            "type": "string",
+            "description": "The IPv4 or IPv6 address to look up"
+          }
+        },
+        "required": [
+          "ip_address"
+        ]
+      }
+    },
+    {
+      "name": "linkedin_to_hashed_emails",
+      "description": "Retrieve all hashed emails (HEMs) associated with a LinkedIn profile slug. Returns personal and business MD5 and SHA256 arrays. Cost: 1 credit. Rate limit: 50 requests/second per endpoint.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "linkedin_slug": {
+            "type": "string",
+            "description": "LinkedIn profile slug / vanity URL (e.g. 'john-doe-123')"
+          }
+        },
+        "required": [
+          "linkedin_slug"
+        ]
+      }
+    },
+    {
+      "name": "ip_to_maid",
+      "description": "Retrieve Mobile Advertising IDs (MAIDs) associated with an IP address. Returns a list of device IDs with type (AAID for Android, IDFA for iOS). Cost: 1 credit. Rate limit: 50 requests/second per endpoint.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ip_address": {
+            "type": "string",
+            "description": "The IPv4 or IPv6 address to look up"
+          }
+        },
+        "required": [
+          "ip_address"
+        ]
+      }
+    },
+    {
+      "name": "ip_to_hem",
+      "description": "Retrieve hashed emails (HEMs) associated with an IP address. Returns a ranked list of MD5 and SHA256 hashes with confidence scores. Cost: 1 credit. Rate limit: 50 requests/second per endpoint.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "ip_address": {
+            "type": "string",
+            "description": "The IPv4 or IPv6 address to look up"
+          }
+        },
+        "required": [
+          "ip_address"
+        ]
+      }
+    },
+    {
+      "name": "hem_to_best_linkedin",
+      "description": "Find the best matching LinkedIn profile URL for a hashed email (MD5). Returns the most confident LinkedIn match for the given HEM. Cost: 1 credit. Rate limit: 50 requests/second per endpoint.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "md5": {
+            "type": "string",
+            "description": "MD5 hash of the email address (hashed email / HEM)"
+          }
+        },
+        "required": [
+          "md5"
+        ]
+      }
+    },
+    {
+      "name": "hem_to_business_profile",
+      "description": "Retrieve the business/company profile associated with a hashed email (MD5), including employer and job title information. Cost: 2 credits. Rate limit: 50 requests/second per endpoint.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "md5": {
+            "type": "string",
+            "description": "MD5 hash of the email address (hashed email / HEM)"
+          }
+        },
+        "required": [
+          "md5"
+        ]
+      }
+    },
+    {
+      "name": "hem_to_linkedin_slug",
+      "description": "Look up the LinkedIn profile slug (e.g. 'john-doe-123') for a hashed email (MD5). Returns the LinkedIn vanity URL slug. Cost: 1 credit. Rate limit: 50 requests/second per endpoint.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "md5": {
+            "type": "string",
+            "description": "MD5 hash of the email address (hashed email / HEM)"
+          }
+        },
+        "required": [
+          "md5"
+        ]
+      }
+    },
+    {
+      "name": "hem_to_maid",
+      "description": "Retrieve the Mobile Advertising ID (MAID) linked to a hashed email (MD5). Useful for cross-device identity resolution. Cost: 1 credit. Rate limit: 50 requests/second per endpoint.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "md5": {
+            "type": "string",
+            "description": "MD5 hash of the email address (hashed email / HEM)"
+          }
+        },
+        "required": [
+          "md5"
+        ]
+      }
+    },
+    {
+      "name": "email_to_best_linkedin",
+      "description": "Find the best matching LinkedIn profile URL for a plain-text email address. Returns the most confident LinkedIn match. Cost: 1 credit. Rate limit: 50 requests/second per endpoint.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Plain-text email address to look up"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      }
+    },
+    {
+      "name": "email_to_business_profile",
+      "description": "Retrieve the business/company profile associated with a plain-text email address, including employer and job title. Cost: 2 credits. Rate limit: 50 requests/second per endpoint.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Plain-text email address to look up"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      }
+    },
+    {
+      "name": "email_to_linkedin_slug",
+      "description": "Look up the LinkedIn profile slug for a plain-text email address. Returns the LinkedIn vanity URL slug. Cost: 1 credit. Rate limit: 50 requests/second per endpoint.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Plain-text email address to look up"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      }
+    },
+    {
+      "name": "email_to_maid",
+      "description": "Retrieve the Mobile Advertising ID (MAID) linked to a plain-text email address. Useful for cross-device identity resolution. Cost: 1 credit. Rate limit: 50 requests/second per endpoint.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "email": {
+            "type": "string",
+            "description": "Plain-text email address to look up"
+          }
+        },
+        "required": [
+          "email"
+        ]
+      }
+    },
+    {
+      "name": "linkedin_to_best_personal_email",
+      "description": "Find the best personal email address for a LinkedIn profile slug. Returns the highest-confidence personal email match. Cost: 1 credit. Rate limit: 50 requests/second per endpoint.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "linkedin_slug": {
+            "type": "string",
+            "description": "LinkedIn profile slug / vanity URL (e.g. 'john-doe-123')"
+          }
+        },
+        "required": [
+          "linkedin_slug"
+        ]
+      }
+    },
+    {
+      "name": "linkedin_to_personal_email",
+      "description": "Retrieve personal email addresses associated with a LinkedIn profile slug. May return multiple candidate emails. Cost: 1 credit. Rate limit: 50 requests/second per endpoint.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "linkedin_slug": {
+            "type": "string",
+            "description": "LinkedIn profile slug / vanity URL (e.g. 'john-doe-123')"
+          }
+        },
+        "required": [
+          "linkedin_slug"
+        ]
+      }
+    },
+    {
+      "name": "linkedin_to_mobile_phone",
+      "description": "Look up the mobile phone number associated with a LinkedIn profile slug. Returns a mobile number when available. Cost: 3 credits. Rate limit: 50 requests/second per endpoint.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "linkedin_slug": {
+            "type": "string",
+            "description": "LinkedIn profile slug / vanity URL (e.g. 'john-doe-123')"
+          }
+        },
+        "required": [
+          "linkedin_slug"
+        ]
+      }
+    },
+    {
+      "name": "linkedin_to_business_profile",
+      "description": "Retrieve the business/company profile for a LinkedIn profile slug, including current employer and role details. Cost: 4 credits. Rate limit: 50 requests/second per endpoint.",
+      "inputSchema": {
+        "type": "object",
+        "properties": {
+          "linkedin_slug": {
+            "type": "string",
+            "description": "LinkedIn profile slug / vanity URL (e.g. 'john-doe-123')"
+          }
+        },
+        "required": [
+          "linkedin_slug"
+        ]
+      }
+    }
+  ]
+}

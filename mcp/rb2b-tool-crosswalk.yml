@@ -1,0 +1,164 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  Derived by reading the RB2B client inside the provider's own published MCP
+  package (@rb2b/rb2b-apis-mcp 1.1.7, dist/api.js), which maps every MCP tool
+  onto the REST path it calls on https://api.rb2b.com/api/v1. RB2B publishes no
+  OpenAPI, so the `rest:` column carries the real HTTP method + path pair rather
+  than an operationId — there is no spec to name one. Confidence is high for
+  every row because the binding is read from the provider's shipped source, not
+  inferred from naming.
+description: >-
+  Binding between the 19 RB2B MCP tools and the RB2B Identity / Enrichment REST
+  surface. Notable divergences: three account tools are local-only or map to a
+  different verb than their name suggests, and four "email_*" tools reuse the
+  same "hem_*" REST endpoints with an `email` body key instead of `md5` — so the
+  REST surface is 13 endpoints behind 19 tools.
+surfaces:
+  openapi: null
+  openapi_note: >-
+    No OpenAPI/Swagger document is published. Probed 404 at
+    api.rb2b.com/openapi.json, /openapi.yaml, /swagger.json, /v1/openapi.json,
+    /api-docs, /docs, /redoc and at the site and console hosts.
+  rest:
+    base_url: https://api.rb2b.com/api/v1
+    auth: Api-Key request header
+    gated: true
+    gated_note: >-
+      Endpoints are live and anonymously reachable but return HTTP 401
+      {"error":"missing_api_key"}; request/response schemas below come from the
+      published client and the OEM guide, not from an authenticated call.
+  graphql: null
+  mcp:
+    package: "@rb2b/rb2b-apis-mcp"
+    transport: stdio
+    hosted: false
+    gated: false
+    note: The tool list is readable from the published npm tarball without credentials.
+  oem_rest:
+    base_url: https://app.rb2b.com/api/v1
+    auth: Api-Key request header
+    note: >-
+      The OEM domain-management + credit-usage endpoints are a separate REST
+      surface with no MCP tools at all (see rest_only[]).
+crosswalk:
+  - tool: ip_to_company
+    category: ip-lookup
+    rest: ["POST /ip_to_company"]
+    binding: direct
+    confidence: high
+  - tool: ip_to_hem
+    category: ip-lookup
+    rest: ["POST /ip_to_hem"]
+    binding: direct
+    confidence: high
+  - tool: ip_to_maid
+    category: ip-lookup
+    rest: ["POST /ip_to_maid"]
+    binding: direct
+    confidence: high
+  - tool: hem_to_linkedin_slug
+    category: hem-to-identity
+    rest: ["POST /hem_to_linkedin"]
+    binding: direct
+    confidence: high
+    note: Tool name and path differ — the path is /hem_to_linkedin, not /hem_to_linkedin_slug.
+  - tool: hem_to_best_linkedin
+    category: hem-to-identity
+    rest: ["POST /hem_to_best_linkedin"]
+    binding: direct
+    confidence: high
+  - tool: hem_to_business_profile
+    category: hem-to-identity
+    rest: ["POST /hem_to_business_profile"]
+    binding: direct
+    confidence: high
+  - tool: hem_to_maid
+    category: hem-to-identity
+    rest: ["POST /hem_to_maid"]
+    binding: direct
+    confidence: high
+  - tool: email_to_linkedin_slug
+    category: email-to-identity
+    rest: ["POST /hem_to_linkedin"]
+    binding: shared-endpoint
+    confidence: high
+    note: 'Same endpoint as hem_to_linkedin_slug, called with an "email" body key instead of "md5".'
+  - tool: email_to_best_linkedin
+    category: email-to-identity
+    rest: ["POST /hem_to_best_linkedin"]
+    binding: shared-endpoint
+    confidence: high
+    note: Same endpoint as hem_to_best_linkedin, keyed on `email`.
+  - tool: email_to_business_profile
+    category: email-to-identity
+    rest: ["POST /hem_to_business_profile"]
+    binding: shared-endpoint
+    confidence: high
+    note: Same endpoint as hem_to_business_profile, keyed on `email`.
+  - tool: email_to_maid
+    category: email-to-identity
+    rest: ["POST /hem_to_maid"]
+    binding: shared-endpoint
+    confidence: high
+    note: Same endpoint as hem_to_maid, keyed on `email`.
+  - tool: linkedin_to_hashed_emails
+    category: linkedin-to-identity
+    rest: ["POST /linkedin_to_hashed_emails"]
+    binding: direct
+    confidence: high
+  - tool: linkedin_to_best_personal_email
+    category: linkedin-to-identity
+    rest: ["POST /linkedin_to_best_personal_email"]
+    binding: direct
+    confidence: high
+  - tool: linkedin_to_personal_email
+    category: linkedin-to-identity
+    rest: ["POST /linkedin_to_personal_email"]
+    binding: direct
+    confidence: high
+  - tool: linkedin_to_mobile_phone
+    category: linkedin-to-identity
+    rest: ["POST /linkedin_to_mobile_phone"]
+    binding: direct
+    confidence: high
+  - tool: linkedin_to_business_profile
+    category: linkedin-to-identity
+    rest: ["POST /linkedin_to_business_profile"]
+    binding: direct
+    confidence: high
+  - tool: check_credits
+    category: account
+    rest: ["GET /credits"]
+    binding: direct
+    confidence: high
+mcp_only:
+  - tool: help
+    reason: Local tool — enumerates the server's own tool table and credit costs; no HTTP call.
+  - tool: set_api_key
+    reason: >-
+      Local tool — validates and rewrites ~/.rb2b/config.json. Validation calls
+      GET /credits, but the tool itself has no REST counterpart.
+rest_only:
+  - capability: OEM domain management
+    endpoints:
+      - "POST https://app.rb2b.com/api/v1/add_domain"
+      - "POST https://app.rb2b.com/api/v1/delete_domain"
+      - "GET https://app.rb2b.com/api/v1/domains"
+    reason: >-
+      The OEM Partner Program surface is a different host and a different
+      product from the Identity APIs; the MCP server does not wrap it.
+  - capability: OEM credit usage
+    endpoints:
+      - "GET https://app.rb2b.com/api/v1/credit_usage"
+    reason: >-
+      OEM-account billing counter (credits_used, last_billing_date,
+      next_billing_date). Distinct from GET /credits on the Identity API, which
+      the check_credits tool wraps.
+coverage:
+  mcp_tools: 19
+  mcp_tools_bound_to_rest: 17
+  mcp_only_tools: 2
+  distinct_rest_endpoints_behind_tools: 13
+  rest_only_endpoints: 4
+  openapi_operations: 0

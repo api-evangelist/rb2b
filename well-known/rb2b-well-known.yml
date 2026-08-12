@@ -1,0 +1,127 @@
+generated: '2026-08-12'
+method: probed
+source: >-
+  Live probe of the /.well-known/ discovery surface on every RB2B host named in
+  apis.yml plus the two live API hosts confirmed in this pass
+  (api.rb2b.com, app.rb2b.com). Status is the HTTP code observed at fetch time.
+description: >-
+  RB2B publishes no /.well-known/ document of its own. The single 200 in this
+  probe is Intercom's platform-level security.txt, served by the hosted help
+  centre at support.rb2b.com (a CNAME onto Intercom) and canonicalised to
+  https://app.intercom.com/.well-known/security.txt — its Contact, Policy and
+  Hiring lines all name Intercom, not RB2B. It is saved verbatim for the record
+  but NO WellKnown or SecurityTxt pointer is emitted in apis.yml, because those
+  pointers assert that the PROVIDER serves the surface, and RB2B does not.
+  www.rb2b.com (Webflow) answers every /.well-known/ path with a 404 HTML stub
+  reading "Invalid .well-known request"; api.rb2b.com, app.rb2b.com and
+  ui.api.rb2b.com answer with the Rails 404 page.
+hosts:
+  - host: https://api.rb2b.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://www.rb2b.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://support.rb2b.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 200
+        type: text/plain
+        file: rb2b-support-security.txt
+        owner: Intercom
+        first_party: false
+        note: >-
+          Intercom's own security.txt, served by the hosted help centre.
+          Canonical https://app.intercom.com/.well-known/security.txt;
+          Contact mailto:security@intercom.com and https://bugcrowd.com/intercom;
+          Expires 2029-03-15. Not an RB2B disclosure programme.
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://ui.api.rb2b.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/openid-configuration
+        status: 404
+      - path: /.well-known/oauth-authorization-server
+        status: 404
+      - path: /.well-known/oauth-protected-resource
+        status: 404
+      - path: /.well-known/api-catalog
+        status: 404
+      - path: /.well-known/ai-plugin.json
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+  - host: https://postman.api.rb2b.com
+    documents:
+      - path: /.well-known/security.txt
+        status: 404
+      - path: /.well-known/agent-card.json
+        status: 404
+      - path: /.well-known/agent.json
+        status: 404
+    note: >-
+      The host itself now returns a Postman "Not found" page (HTTP 404) at the
+      root. The apis.yml APIDocumentation pointer at https://postman.api.rb2b.com/
+      is dead as of this probe.
+agent_card:
+  found: false
+  probed:
+    - https://api.rb2b.com/.well-known/agent-card.json
+    - https://api.rb2b.com/.well-known/agent.json
+    - https://www.rb2b.com/.well-known/agent-card.json
+    - https://www.rb2b.com/.well-known/agent.json
+    - https://support.rb2b.com/.well-known/agent-card.json
+    - https://support.rb2b.com/.well-known/agent.json
+    - https://ui.api.rb2b.com/.well-known/agent-card.json
+    - https://ui.api.rb2b.com/.well-known/agent.json
+    - https://postman.api.rb2b.com/.well-known/agent-card.json
+    - https://postman.api.rb2b.com/.well-known/agent.json
+  note: >-
+    Every path 404s. No a2a/ artifact is written — an agent card is search-only
+    and must never be authored on the provider's behalf.

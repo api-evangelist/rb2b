@@ -1,0 +1,130 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://www.rb2b.com/security, https://www.rb2b.com/compliance,
+  https://www.rb2b.com/gdpr, https://retention.securitypal.com (trust centre),
+  https://support.rb2b.com/en/articles/15589545-compliance-faqs, plus live
+  probes of both API hosts on 2026-08-12.
+description: >-
+  Which cross-cutting and industry standards the RB2B API surface conforms to.
+  RB2B carries real organisational compliance — SOC 2 Type 2, CCPA and GDPR
+  posture published on its own site and backed by a SecurityPal trust centre —
+  but almost no protocol-level API standards: no OAuth, no OIDC, no RFC 9457
+  errors, no RFC 8594 sunset headers, no webhook signing, no discovery
+  documents.
+standards:
+  - id: soc2-type2
+    conforms: true
+    evidence: >-
+      "RB2B is SOC2 Type 2 Certified and CCPA Compliant" — https://www.rb2b.com/security.
+      Assurance profile published at https://retention.securitypal.com.
+  - id: ccpa
+    conforms: true
+    evidence: >-
+      Stated on https://www.rb2b.com/security; a database opt-out is operated at
+      https://app.retention.com/optout/ and a "Your Privacy Choices" page at
+      https://www.rb2b.com/your-privacy-choices.
+  - id: gdpr
+    conforms: true
+    evidence: >-
+      Dedicated GDPR page at https://www.rb2b.com/gdpr (HTTP 200) and a
+      Compliance FAQ at
+      https://support.rb2b.com/en/articles/15589545-compliance-faqs. Note that
+      person-level resolution is US-only by product design; company-level
+      resolution is global.
+  - id: iso-27001
+    conforms: false
+    evidence: Not claimed on any RB2B page read in this pass.
+  - id: hipaa
+    conforms: false
+    evidence: Not claimed.
+  - id: pci-dss
+    conforms: false
+    evidence: >-
+      Not claimed by RB2B. Card handling is delegated — app.rb2b.com's CSP
+      allow-lists js.stripe.com and the changelog references card details held
+      in Stripe.
+  - id: oauth2
+    conforms: false
+    evidence: >-
+      No OAuth anywhere. /.well-known/oauth-authorization-server and
+      /.well-known/oauth-protected-resource return 404 on api.rb2b.com,
+      app.rb2b.com and www.rb2b.com. Authentication is a static Api-Key header.
+  - id: oidc
+    conforms: false
+    evidence: /.well-known/openid-configuration returns 404 on every RB2B host.
+  - id: api-key-header-auth
+    conforms: true
+    evidence: >-
+      Api-Key request header on both surfaces, documented in the OEM guide and
+      implemented in the provider's published MCP client. Probed 2026-08-12.
+  - id: rfc9457-problem-details
+    conforms: false
+    evidence: >-
+      Errors are a flat {"error":"<slug>"} object served as application/json.
+      No type/title/status/detail/instance members. Probed 2026-08-12.
+  - id: rfc8594-sunset-header
+    conforms: false
+    evidence: No Sunset or Deprecation header and no deprecation policy published.
+  - id: rfc9116-security-txt
+    conforms: false
+    evidence: >-
+      No RB2B-authored /.well-known/security.txt. The single 200 in the probe is
+      Intercom's platform document served by the hosted help centre, canonical
+      https://app.intercom.com/.well-known/security.txt.
+  - id: idempotency
+    conforms: false
+    evidence: >-
+      No Idempotency-Key header or replay window on a credit-metered API — a
+      retried call is billed again. See conventions/rb2b-conventions.yml.
+  - id: pagination
+    conforms: false
+    evidence: No endpoint returns a paged collection; there are no pagination parameters.
+  - id: webhook-signing
+    conforms: false
+    evidence: >-
+      RB2B explicitly requires the destination webhook to be "a simple, single
+      URL … without the necessity for additional headers", and tells integrators
+      to put any authentication in the URL as query parameters
+      (https://support.rb2b.com/en/articles/8976614-setup-guide-webhook). There
+      is no signature header and no shared secret.
+  - id: asyncapi
+    conforms: false
+    evidence: No AsyncAPI document published; the webhook contract is prose plus a sample payload.
+  - id: openapi
+    conforms: false
+    evidence: >-
+      No OpenAPI/Swagger document. Probed /openapi.json, /openapi.yaml,
+      /swagger.json, /v1/openapi.json, /api-docs, /docs and /redoc on
+      api.rb2b.com, www.rb2b.com and the console host — all 404 or HTML.
+  - id: mcp
+    conforms: true
+    evidence: >-
+      First-party MCP server @rb2b/rb2b-apis-mcp 1.1.7, built on
+      @modelcontextprotocol/sdk ^1.0.0, exposing 19 tools with real
+      inputSchemas over stdio. See mcp/rb2b-mcp.yml.
+  - id: a2a
+    conforms: false
+    evidence: No agent card at /.well-known/agent-card.json or /.well-known/agent.json on any host.
+  - id: llmstxt
+    conforms: true
+    evidence: >-
+      https://support.rb2b.com/llms.txt returns HTTP 200 text/plain, 275 lines
+      indexing the RB2B knowledge base with .md mirrors of every article. Saved
+      verbatim to llms/rb2b-llms.txt.
+  - id: tls13
+    conforms: true
+    evidence: TLS 1.3 with HSTS max-age=31536000; includeSubDomains; preload. See security/rb2b-domain-security.yml.
+  - id: dnssec
+    conforms: false
+    evidence: rb2b.com is not DNSSEC-signed; no CAA records. Probed 2026-08-12.
+compliance_program:
+  certifications: [SOC 2 Type 2]
+  frameworks: [CCPA, GDPR]
+  trust_center: https://retention.securitypal.com
+  security_page: https://www.rb2b.com/security
+  compliance_page: https://www.rb2b.com/compliance
+  gdpr_page: https://www.rb2b.com/gdpr
+  vulnerability_management: 'Amazon Inspector, 24/7 monitoring (stated on the security page)'
+  vulnerability_disclosure_program: none published
+  data_position: '"We do not repackage or resell your data" (security page)'

@@ -1,0 +1,44 @@
+generated: '2026-08-12'
+method: generated
+source: >-
+  Packaged Agent Skills for the two RB2B API surfaces. RB2B publishes no
+  OpenAPI, so these are not grounded in operationIds — they are grounded in the
+  provider's OWN published artifacts: the tool names, request-body keys, HTTP
+  paths and credit costs inside @rb2b/rb2b-apis-mcp 1.1.7 (captured in
+  mcp/rb2b-mcp-tools.json and mcp/rb2b-tool-crosswalk.yml), and RB2B's OEM API &
+  Webhook Guide. Every endpoint referenced was probed live on 2026-08-12.
+  Cross-cutting rules cite ../conventions/, ../errors/, ../authentication/,
+  ../rate-limits/ and ../asyncapi/.
+skills:
+  - file: rb2b-resolve-visitor-identity.md
+    name: Resolve an anonymous visitor to a named person
+    api: mcp/rb2b-mcp.yml
+    surface: https://api.rb2b.com/api/v1
+    operations:
+      - ip_to_company
+      - ip_to_hem
+      - hem_to_best_linkedin
+      - hem_to_linkedin_slug
+      - hem_to_business_profile
+      - linkedin_to_business_profile
+      - linkedin_to_best_personal_email
+      - linkedin_to_personal_email
+      - linkedin_to_mobile_phone
+      - email_to_best_linkedin
+      - email_to_business_profile
+      - ip_to_maid
+      - check_credits
+  - file: rb2b-oem-domain-and-webhook-setup.md
+    name: Authorize an OEM domain and receive visitor webhooks
+    api: asyncapi/rb2b-webhooks.yml
+    surface: https://app.rb2b.com/api/v1
+    operations:
+      - add_domain
+      - domains
+      - delete_domain
+      - credit_usage
+provider_published_skills: none
+provider_published_skills_note: >-
+  No AGENTS.md, /skills endpoint, or provider-published agent skill was found on
+  any RB2B host. These two are API Evangelist generations from RB2B's public
+  material, not RB2B artifacts.

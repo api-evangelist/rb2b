@@ -1,0 +1,105 @@
+generated: '2026-08-12'
+method: searched
+source: https://support.rb2b.com/en/articles/10442291-changelog
+description: >-
+  RB2B maintains a dated product changelog as a help-centre article, grouped by
+  year then month then date, with each entry labelled [Feature], [Update] or
+  [Fix]. It is a PRODUCT changelog, not an API changelog — it covers the
+  dashboard, the tracking script and the destination integrations, and it does
+  not record changes to the /api/v1 REST surfaces or to the webhook payload
+  schema. There is no version number, no RSS/Atom feed, and no machine-readable
+  form; the plain-text mirror at
+  https://support.rb2b.com/en/articles/10442291-changelog.md is the closest
+  thing to one.
+docs: https://support.rb2b.com/en/articles/10442291-changelog
+machine_readable: https://support.rb2b.com/en/articles/10442291-changelog.md
+feed: null
+scheme: dated entries, no version numbers
+covers: [dashboard, tracking script, integrations, billing]
+does_not_cover: [rest api, webhook payload schema, mcp server]
+current_version: null
+window: 2026-03-17 to 2026-07-20 (most recent entries at capture time)
+entries:
+  - date: '2026-07-20'
+    type: update
+    title: Installation Debugger updates
+    highlights:
+      - Detects the case where CookieYes is present on a site but the CookieYes service itself is offline, which suppresses identification.
+  - date: '2026-07-15'
+    type: update
+    title: Installation Debugger updates
+    highlights:
+      - Clearer error and warning messaging; tests updated to prevent false positives.
+  - date: '2026-07-09'
+    type: fix
+    title: Email resolution restored
+    breaking: false
+    highlights:
+      - Fixed a regression present since 2026-06-20 that reduced the number of profiles carrying email addresses.
+  - date: '2026-07-09'
+    type: feature
+    title: AutoCRM integration
+    highlights:
+      - Identified visitors are enrolled automatically in an AI-written email sequence.
+    docs: https://support.rb2b.com/en/articles/14463578-setup-guide-autocrm
+  - date: '2026-07-09'
+    type: feature
+    title: Reachfast integration
+    highlights:
+      - Enriches identified LinkedIn profiles with additional contact data.
+    docs: https://support.rb2b.com/en/articles/14463703-setup-guide-reachfast
+  - date: '2026-07-09'
+    type: fix
+    title: Billing and matching fixes
+    highlights:
+      - Dashboard showed stale card details when the default payment method was changed directly in Stripe.
+      - Hot Leads department matching refined for engineering roles.
+      - Three coupon codes failed on redemption.
+  - date: '2026-06-08'
+    type: fix
+    title: Company mismatch on profiles
+    highlights:
+      - Wrong company shown on a subset of profiles identified between 2026-06-01 and 2026-06-08.
+  - date: '2026-05-13'
+    type: update
+    title: RB2B WordPress plugin
+    highlights:
+      - Updated for compatibility with the current WordPress release.
+  - date: '2026-04-09'
+    type: update
+    title: CSV export timeframe expanded
+    highlights:
+      - Export windows extended to 90, 120 and 365 days.
+  - date: '2026-04-08'
+    type: fix
+    title: Profiles pagination
+    highlights:
+      - Dashboard pagination cut off at 1,000 profiles; now scrolls the full list.
+      - RB2B Academy dashboard link replaced with the RB2B Growth Library (https://library.rb2b.com).
+  - date: '2026-03-31'
+    type: update
+    title: Removed Traffic Summary statistics
+    breaking: false
+    highlights:
+      - Traffic Summary cards removed from the dashboard to separate visitor counts from credits used.
+  - date: '2026-03-27'
+    type: update
+    title: User experience updates
+    highlights:
+      - Copy-to-clipboard on profile email addresses.
+      - Fixed missing integration-error notifications for users with daily CSV export disabled.
+  - date: '2026-03-24'
+    type: update
+    title: Profiles page redesign
+    highlights:
+      - Layout, tag colour and visual refinements on the Profiles page.
+  - date: '2026-03-17'
+    type: update
+    title: User experience and access updates
+    highlights:
+      - Dashboard access over VPN, proxy or VM now returns an explanatory message instead of a bare 403.
+      - Sitewide modals for missing card on file and failed subscription payment.
+      - Raw HTML and layout overflow fixes on profiles.
+gaps:
+  - No API changelog — REST endpoint, payload or credit-cost changes are not recorded anywhere public.
+  - No feed (RSS/Atom) and no version identifiers, so changes cannot be tracked programmatically.

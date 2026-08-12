@@ -1,0 +1,150 @@
+generated: '2026-08-12'
+method: derived
+source: >-
+  Derived from the request/response shapes RB2B publishes: the Identity /
+  Enrichment endpoint set and its input keys in @rb2b/rb2b-apis-mcp 1.1.7
+  (dist/api.js + the tool inputSchemas in mcp/rb2b-mcp-tools.json), the fixed
+  webhook payload field list in the webhook setup guide and the OEM API guide,
+  and the OEM domain/credit endpoints. There is no OpenAPI and therefore no
+  components.schemas to walk — entities below are inferred from the identifiers
+  the API accepts and returns, not from a published schema.
+description: >-
+  RB2B is an identity graph with one job: take a weak, anonymous identifier and
+  return a stronger, person-level one. Every Identity endpoint is an edge in that
+  graph. There are no CRUD resources, no object IDs, no id-prefix convention and
+  no retrievable records — the API returns projections, not entities you can
+  fetch back by key. The only true stored resources are the OEM account's
+  authorised domains and its credit balance.
+id_conventions:
+  published: false
+  note: >-
+    RB2B does not expose object identifiers, ID prefixes, or a canonical person
+    key. The de-facto join keys are the LinkedIn slug (person) and the company
+    domain (organisation).
+entities:
+  - name: IPAddress
+    kind: identifier
+    fields:
+      - {name: ip_address, type: string, note: IPv4 or IPv6}
+    note: The weakest starting identifier — the anonymous website visitor's address.
+  - name: HashedEmail
+    aliases: [HEM]
+    kind: identifier
+    fields:
+      - {name: md5, type: string, note: MD5 hash of an email address; the accepted input form}
+      - {name: sha256, type: string, note: returned in linkedin_to_hashed_emails and ip_to_hem results}
+      - {name: confidence, type: number, note: ip_to_hem returns a ranked list with confidence scores}
+      - {name: scope, type: string, enum: [personal, business], note: linkedin_to_hashed_emails returns both}
+  - name: EmailAddress
+    kind: identifier
+    fields:
+      - {name: email, type: string, note: plain-text; accepted interchangeably with md5 on the hem_* endpoints}
+      - {name: scope, type: string, enum: [personal, business]}
+  - name: LinkedInProfile
+    kind: entity
+    primary_key: linkedin_slug
+    fields:
+      - {name: linkedin_slug, type: string, note: "vanity URL segment, e.g. john-doe-123"}
+      - {name: linkedin_url, type: string, format: uri}
+      - {name: confidence, type: string, note: "*_best_* endpoints return the highest-confidence match"}
+    note: The de-facto person key across the whole graph.
+  - name: MAID
+    kind: identifier
+    fields:
+      - {name: maid, type: string}
+      - {name: type, type: string, enum: [AAID, IDFA], note: AAID for Android, IDFA for iOS}
+  - name: MobilePhone
+    kind: attribute
+    fields:
+      - {name: phone, type: string}
+    note: Most expensive single lookup on the surface — 3 credits.
+  - name: BusinessProfile
+    kind: entity
+    fields:
+      - {name: title, type: string}
+      - {name: company, type: string}
+      - {name: industry, type: string}
+    note: Returned by the *_to_business_profile family; the richest and most expensive projection (2-4 credits).
+  - name: Company
+    kind: entity
+    primary_key: domain
+    fields:
+      - {name: company_name, type: string}
+      - {name: website, type: string, format: uri}
+      - {name: industry, type: string}
+      - {name: employee_count, type: [integer, string]}
+      - {name: estimate_revenue, type: string}
+    note: >-
+      Company-level identification is global; person-level resolution is US-only.
+      Field names here follow the webhook payload's Title Case forms.
+  - name: VisitorIdentification
+    kind: event
+    delivered_by: webhook
+    fields:
+      - {name: LinkedIn URL, required: true}
+      - {name: First Name, required: true}
+      - {name: Last Name}
+      - {name: Title}
+      - {name: Company Name}
+      - {name: Business Email}
+      - {name: Website}
+      - {name: Industry}
+      - {name: Employee Count}
+      - {name: Estimate Revenue}
+      - {name: City}
+      - {name: State}
+      - {name: Zipcode}
+      - {name: Seen At, note: ISO 8601}
+      - {name: Referrer}
+      - {name: Captured URL}
+      - {name: Tags}
+      - {name: customer_id, note: OEM only}
+    detail: asyncapi/rb2b-webhooks.yml
+  - name: Domain
+    kind: resource
+    surface: https://app.rb2b.com/api/v1
+    primary_key: domain
+    operations: [add_domain, delete_domain, domains]
+    fields:
+      - {name: domain, type: string, note: "full form including subdomain, e.g. sub.domain.com"}
+      - {name: added, type: boolean, note: add_domain response}
+      - {name: domain_deleted, type: boolean, note: delete_domain response}
+    note: >-
+      The only genuinely CRUD-shaped resource in the API. A domain must be
+      registered here before the OEM script will collect anything from it.
+  - name: CreditBalance
+    kind: resource
+    fields:
+      - {name: credits_used, type: integer, note: OEM GET /credit_usage}
+      - {name: last_billing_date, type: string, format: date-time}
+      - {name: next_billing_date, type: string, format: date-time}
+    note: >-
+      Two different balance views exist — GET /credits on the Identity API and
+      GET /credit_usage on the OEM API — belonging to two separate accounts.
+relationships:
+  - {from: IPAddress, to: Company, type: resolves_to, via: ip_to_company, cardinality: has_one}
+  - {from: IPAddress, to: HashedEmail, type: resolves_to, via: ip_to_hem, cardinality: has_many, note: ranked by confidence}
+  - {from: IPAddress, to: MAID, type: resolves_to, via: ip_to_maid, cardinality: has_many}
+  - {from: HashedEmail, to: LinkedInProfile, type: resolves_to, via: hem_to_linkedin / hem_to_best_linkedin, cardinality: has_one}
+  - {from: HashedEmail, to: BusinessProfile, type: resolves_to, via: hem_to_business_profile, cardinality: has_one}
+  - {from: HashedEmail, to: MAID, type: resolves_to, via: hem_to_maid, cardinality: has_one}
+  - {from: EmailAddress, to: LinkedInProfile, type: resolves_to, via: hem_to_linkedin (email key), cardinality: has_one}
+  - {from: EmailAddress, to: BusinessProfile, type: resolves_to, via: hem_to_business_profile (email key), cardinality: has_one}
+  - {from: EmailAddress, to: MAID, type: resolves_to, via: hem_to_maid (email key), cardinality: has_one}
+  - {from: LinkedInProfile, to: HashedEmail, type: resolves_to, via: linkedin_to_hashed_emails, cardinality: has_many, note: personal + business, MD5 + SHA256}
+  - {from: LinkedInProfile, to: EmailAddress, type: resolves_to, via: linkedin_to_personal_email / linkedin_to_best_personal_email, cardinality: has_many}
+  - {from: LinkedInProfile, to: MobilePhone, type: resolves_to, via: linkedin_to_mobile_phone, cardinality: has_one}
+  - {from: LinkedInProfile, to: BusinessProfile, type: resolves_to, via: linkedin_to_business_profile, cardinality: has_one}
+  - {from: BusinessProfile, to: Company, type: belongs_to, via: employer, cardinality: has_one}
+  - {from: VisitorIdentification, to: LinkedInProfile, type: has_one, via: "LinkedIn URL"}
+  - {from: VisitorIdentification, to: Company, type: has_one, via: "Company Name / Website"}
+  - {from: Domain, to: VisitorIdentification, type: has_many, via: OEM tracking script}
+graph_note: >-
+  The graph is bidirectional around LinkedInProfile: IP → HEM → LinkedIn walks
+  in, and LinkedIn → HEM / email / phone / business profile walks back out. That
+  round trip — anonymous IP to a named person's mobile number in four metered
+  calls — is the whole product, and it is why the compliance posture
+  (security/, conformance/) belongs beside the data model rather than in a
+  separate conversation.
+render: null
+render_note: No subway/ diagram exists for this provider.

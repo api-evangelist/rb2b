@@ -1,0 +1,102 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://support.rb2b.com/en/articles/12880800-using-the-rb2b-oem-program-api-webhook-guide
+  (OEM header table), the published @rb2b/rb2b-apis-mcp client (dist/api.js sets
+  the Api-Key header), and live unauthenticated probes of both API hosts on
+  2026-08-12.
+description: >-
+  Both RB2B REST surfaces authenticate with a single static account API key sent
+  in a custom Api-Key request header. There is no OAuth 2.0, no OIDC, no bearer
+  scheme, no HMAC request signing, no mutual TLS, and no scope model — one key
+  grants the whole surface for the account it belongs to. RB2B publishes no
+  OpenAPI, so this profile is read from the provider's documentation and its own
+  shipped client rather than derived from securitySchemes.
+summary:
+  types: [apiKey]
+  oauth2: false
+  oidc: false
+  scopes: false
+  mtls: false
+  request_signing: false
+schemes:
+  - name: apiKeyHeader
+    type: apiKey
+    in: header
+    parameter_name: Api-Key
+    description: >-
+      Static per-account API key. The same header name is used on both the
+      Identity/Enrichment API (api.rb2b.com) and the OEM Partner API
+      (app.rb2b.com), but the keys are issued by two separate accounts and are
+      not interchangeable.
+    applies_to:
+      - https://api.rb2b.com/api/v1
+      - https://app.rb2b.com/api/v1
+credentials:
+  - surface: Identity / Enrichment API (API Partner Program)
+    base_url: https://api.rb2b.com/api/v1
+    where_issued: https://ui.api.rb2b.com — the API Partner Program console (signup at /signup)
+    account_note: >-
+      A standalone account with its own unified credit balance, operating
+      independently from the consumer RB2B platform at app.rb2b.com.
+    key_prefix: null
+    key_prefix_note: >-
+      RB2B does not document a key prefix. The API does validate key SHAPE
+      before authenticating — a malformed value returns
+      {"error":"invalid_api_key_format"} rather than a generic 401 — but the
+      expected format is not published.
+    rotation: >-
+      Not documented for the Identity API. For the OEM key, RB2B tells partners
+      to contact support to regenerate if the key is exposed or a holder leaves
+      the organisation, and warns that dependent systems must then be updated.
+    storage_guidance: >-
+      The first-party MCP server stores the key at ~/.rb2b/config.json with file
+      mode 0600 (owner read/write only) and offers a set_api_key tool that
+      validates a replacement before writing it.
+  - surface: OEM Partner API (domain management + credit usage)
+    base_url: https://app.rb2b.com/api/v1
+    where_issued: https://app.rb2b.com/oem_dashboard — the API Key card, copied in plain text
+    account_note: OEM partner account; the key governs which domains RB2B will track.
+    key_prefix: null
+    rotation: Contact RB2B support to regenerate; update dependent systems afterwards.
+required_headers:
+  - {name: Api-Key, value: "<account api key>", required: true}
+  - {name: Content-Type, value: application/json, required: true}
+  - {name: Accept, value: application/json, required: true, note: documented for the OEM API}
+  - {name: User-Agent, value: "<any>", required: true, note: "documented as required in the OEM header table"}
+observed:
+  - probe: GET https://api.rb2b.com/api/v1/credits
+    date: '2026-08-12'
+    sent: no Api-Key header
+    http_status: 401
+    body: '{"error":"missing_api_key"}'
+  - probe: POST https://api.rb2b.com/api/v1/ip_to_company
+    date: '2026-08-12'
+    sent: 'Api-Key: <deliberately malformed value>'
+    http_status: 401
+    body: '{"error":"invalid_api_key_format"}'
+  - probe: GET https://app.rb2b.com/api/v1/domains
+    date: '2026-08-12'
+    sent: no Api-Key header
+    http_status: 401
+    body: '{"error":"missing_api_key"}'
+  - probe: GET https://app.rb2b.com/api/v1/credit_usage
+    date: '2026-08-12'
+    sent: no Api-Key header
+    http_status: 401
+    body: '{"error":"missing_api_key"}'
+    response_headers_of_note:
+      strict-transport-security: max-age=31536000; includeSubDomains; preload
+      x-request-id: present (uuid v4)
+      x-frame-options: DENY
+      x-content-type-options: nosniff
+      content-security-policy: present
+gaps:
+  - No published key-format or prefix convention, despite the API validating format.
+  - No self-service key rotation documented for either surface.
+  - No scopes, no least-privilege or read-only key type.
+  - No OAuth 2.0 for partner/OEM delegation — an OEM partner holds a single account-wide key.
+  - Outbound webhooks carry no signature or shared secret (see asyncapi/rb2b-webhooks.yml).
+docs:
+  - https://support.rb2b.com/en/articles/12880800-using-the-rb2b-oem-program-api-webhook-guide
+  - https://www.npmjs.com/package/@rb2b/rb2b-apis-mcp

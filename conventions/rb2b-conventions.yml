@@ -1,0 +1,113 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://support.rb2b.com/en/articles/12880800-using-the-rb2b-oem-program-api-webhook-guide,
+  the published @rb2b/rb2b-apis-mcp client (dist/api.js, dist/config.js), and
+  live probes of both API hosts on 2026-08-12.
+description: >-
+  Cross-cutting request/response semantics for the two RB2B REST surfaces. RB2B
+  publishes no API reference site, no OpenAPI, and no conventions page, so this
+  is assembled from the OEM guide, the provider's own shipped MCP client, and
+  the wire. The honest headline: this is a small, verb-in-the-path RPC surface
+  with static key auth and almost none of the runtime affordances an agent
+  expects — no idempotency keys, no pagination, no versioning header, no
+  webhook signature, no rate-limit headers.
+surfaces:
+  - name: Identity / Enrichment API (API Partner Program)
+    base_url: https://api.rb2b.com/api/v1
+    style: RPC over HTTPS — POST with a JSON body to a verb-named path, JSON response
+    operations: 13
+  - name: OEM Partner API
+    base_url: https://app.rb2b.com/api/v1
+    style: RPC over HTTPS — POST/GET to a verb-named path, JSON response
+    operations: 4
+authentication:
+  scheme: Static API key in the Api-Key request header
+  oauth2: false
+  detail: authentication/rb2b-authentication.yml
+request:
+  content_type: application/json
+  accept: application/json
+  user_agent: Documented as a required header on the OEM API.
+  body_style: >-
+    A single-key JSON object naming the input identifier — {"ip_address": ...},
+    {"email": ...}, {"md5": ...}, {"linkedin_slug": ...} or {"domain": ...}.
+    Several Identity endpoints accept either `email` or `md5` against the same
+    path.
+idempotency:
+  supported: false
+  mechanism: null
+  evidence: >-
+    No Idempotency-Key header, no request-id echo semantics, and no replay
+    guarantee appear in the OEM guide, the MCP client, or any observed response.
+  practical_note: >-
+    Lookups are read-only POSTs and safe to repeat, but each repeat is metered
+    and DEDUCTS CREDITS AGAIN — there is no replay window, so a retried call
+    after a timeout is billed twice. add_domain and delete_domain are naturally
+    convergent (add_domain returns {"added": true}); no idempotency key is
+    offered for them.
+pagination:
+  supported: false
+  evidence: >-
+    No endpoint returns a paged collection. GET /domains returns the whole
+    domain set in one object; every Identity endpoint resolves a single
+    identifier.
+field_expansion:
+  supported: false
+sparse_fields:
+  supported: false
+metadata:
+  supported: false
+  note: >-
+    The OEM tracking script does accept one caller-supplied passthrough value,
+    customer_id, which RB2B echoes back on the webhook payload. That is the only
+    customer-controlled field anywhere in the surface.
+request_tracing:
+  header: x-request-id
+  echoed: false
+  documented: false
+  observed: true
+  note: >-
+    Present on every response observed (UUID v4), alongside x-runtime. RB2B does
+    not document it or ask clients to quote it, but it is the only correlation
+    identifier available.
+versioning:
+  scheme: path
+  current: v1
+  header: null
+  evidence: Both surfaces are mounted at /api/v1. No version header, no version negotiation.
+  detail: lifecycle/rb2b-lifecycle.yml
+errors:
+  format: proprietary
+  rfc9457: false
+  envelope: '{"error": "<snake_case_slug>"}'
+  detail: errors/rb2b-error-codes.yml
+rate_limiting:
+  published_limit: 50 requests/second per endpoint
+  headers: none observed or documented
+  status_on_exhaustion: 429
+  detail: rate-limits/rb2b-rate-limits.yml
+metering:
+  model: prepaid credits, deducted per successful call
+  balance_endpoint: GET https://api.rb2b.com/api/v1/credits
+  oem_usage_endpoint: GET https://app.rb2b.com/api/v1/credit_usage
+  per_call_cost: 1-4 credits depending on the endpoint (see mcp/rb2b-mcp.yml)
+  client_side_guard: >-
+    The first-party MCP server checks the balance before each paid call and
+    refuses when credits are insufficient — a client-side guard, not a server
+    contract.
+webhooks:
+  direction: outbound only
+  signature: none
+  retries: none documented — a non-200 or a >15s silence disconnects the integration
+  detail: asyncapi/rb2b-webhooks.yml
+transport_security:
+  tls: TLS 1.3
+  hsts: max-age=31536000; includeSubDomains; preload (app.rb2b.com, api.rb2b.com)
+  detail: security/rb2b-domain-security.yml
+gaps:
+  - No idempotency key on a credit-metered API — a retry after a timeout is billed again.
+  - No API reference site; the only machine-readable description of the surface is an npm tarball.
+  - No rate-limit response headers, so a client cannot pace itself from the wire.
+  - No webhook signature or shared secret.
+  - No request-id contract, despite the server emitting one.

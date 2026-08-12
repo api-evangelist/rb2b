@@ -1,0 +1,86 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://support.rb2b.com/en/articles/10442291-changelog,
+  https://support.rb2b.com/en/articles/14047483-service-interruptions,
+  https://support.rb2b.com/en/articles/12880800-using-the-rb2b-oem-program-api-webhook-guide,
+  plus live probes on 2026-08-12.
+description: >-
+  RB2B runs a product changelog on its help centre and keeps a manually-updated
+  "Service Interruptions" article, but publishes no API versioning policy, no
+  deprecation policy, no Sunset/Deprecation header support, no SLA, and no
+  status page. Both REST surfaces sit at /api/v1 with no version negotiation of
+  any kind.
+versioning:
+  scheme: path
+  mechanism: URI path segment — /api/v1
+  current: v1
+  header: null
+  negotiation: none
+  policy_url: null
+  notes: >-
+    Both https://api.rb2b.com/api/v1 and https://app.rb2b.com/api/v1 are pinned
+    to v1. RB2B does not publish what constitutes a breaking change, how a v2
+    would be introduced, or how long v1 would be supported.
+deprecation:
+  policy_url: null
+  sunset_header: false
+  deprecation_header: false
+  rfc8594: false
+  changelog: https://support.rb2b.com/en/articles/10442291-changelog
+  notes: >-
+    No deprecation policy is published for either API. The changelog does record
+    product removals after the fact (e.g. the 2026-03-31 removal of the
+    dashboard Traffic Summary cards, and the 2026-01-28 Free-plan Slack
+    notification pause), so change is communicated — but only as news, never as
+    advance notice with a dated sunset.
+  deprecated_operations: []
+  deprecated_operations_note: >-
+    None can be derived — there is no OpenAPI, so there are no deprecated:true
+    flags to read.
+sla:
+  url: null
+  public_uptime_target: null
+  notes: >-
+    No uptime commitment is published for the platform, the Identity API, or the
+    OEM webhook delivery path.
+status_page:
+  url: null
+  probed:
+    - {url: 'https://status.rb2b.com/', result: DNS does not resolve}
+    - {url: 'https://rb2b.statuspage.io/', result: 'HTTP 302 to https://www.statuspage.io/ — no RB2B page exists'}
+  substitute:
+    url: https://support.rb2b.com/en/articles/14047483-service-interruptions
+    kind: manually-edited help-centre article
+    current_text: There are no interruptions in service at this time.
+    note: >-
+      A hand-maintained article is not a status page: it has no components, no
+      history, no incident timeline, no subscribe, and no machine-readable feed.
+      Recorded here so the absence is explicit; no StatusPage pointer is emitted
+      in apis.yml.
+support:
+  channel: https://support.rb2b.com/en/
+  email: support@rb2b.com
+  feature_requests: https://support.rb2b.com/en/articles/11012656-feature-requests
+integration_lifecycle:
+  webhook_auto_disable: >-
+    RB2B disconnects a destination webhook that returns any non-200, or that
+    does not respond within 15 seconds. Repeated failures disable the
+    integration and notify the account owner by email; it must then be
+    re-enabled by hand.
+  docs: https://support.rb2b.com/en/articles/9806566-webhook-faqs
+  detail: asyncapi/rb2b-webhooks.yml
+docs_lifecycle_finding:
+  observation: >-
+    The API Partner Program documentation was public and is now gated. The
+    article at
+    https://support.rb2b.com/en/articles/12579420-rb2b-s-api-partner-program —
+    still cited by search engines and still referenced from apis.yml — returned
+    HTTP 404 on 2026-08-12, and its parent collection
+    https://support.rb2b.com/en/collections/16023167-api-partner-program returned
+    HTTP 401. The RB2B site's own /apis page now 301-redirects to
+    https://retention.com/apis, and https://postman.api.rb2b.com/ returns a
+    Postman "Not found" page.
+  effect: >-
+    The only remaining public, machine-readable description of the Identity /
+    Enrichment API is the npm tarball of RB2B's own MCP server.

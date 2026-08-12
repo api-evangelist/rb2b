@@ -1,0 +1,43 @@
+generated: '2026-08-12'
+method: searched
+source: >-
+  https://www.npmjs.com/package/@rb2b/rb2b-apis-mcp — package.json declares
+  bin.rb2b-apis-mcp → dist/cli.js; the README documents the init flow.
+description: >-
+  RB2B ships no general-purpose API CLI. The only first-party command-line
+  binary is the one bundled with its MCP server package: a setup wizard that
+  captures and validates an API key and registers the MCP server with local
+  agent clients. It has no data commands — you cannot resolve an identity from
+  the shell — so it is recorded as a configuration CLI rather than an API CLI.
+scope: configuration-only
+name: rb2b-apis-mcp
+package: "@rb2b/rb2b-apis-mcp"
+version: 1.1.7
+official: true
+install:
+  - {method: npx, command: "npx -y @rb2b/rb2b-apis-mcp"}
+  - {method: npx-setup, command: "npx -y @rb2b/rb2b-apis-mcp init"}
+requirements:
+  - Node.js 18+
+  - An RB2B API Partner Program account and key (https://ui.api.rb2b.com)
+commands:
+  - name: init
+    description: >-
+      Setup wizard. Prompts for the RB2B API key, validates it against the API,
+      writes it to ~/.rb2b/config.json with mode 0600, and auto-registers the
+      MCP server with Claude Code and Claude Desktop when they are detected.
+      Re-running it detects an existing key and prompts for a replacement.
+  - name: (default)
+    description: >-
+      Run with no arguments to start the MCP server on stdio. Exits with a
+      message to run `init` if no key is configured.
+related_commands:
+  - {tool: claude, command: "claude mcp add rb2b -- npx -y @rb2b/rb2b-apis-mcp", note: registers the server with Claude Code}
+config:
+  path: ~/.rb2b/config.json
+  mode: '0600'
+  shape: '{"apiKey": "…"}'
+not_present:
+  - No CLI for the OEM Domain Management API (add/remove/list domains, credit usage).
+  - No data or query commands — identity lookups are only reachable through an MCP client or a direct HTTP call.
+  - No shell completions, no config profiles, no output formatting flags.
