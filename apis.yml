@@ -59,7 +59,7 @@ tags:
 url: https://raw.githubusercontent.com/api-evangelist/rb2b/refs/heads/main/apis.yml
 created: '2026-05-25'
 modified: '2026-08-12'
-specificationVersion: '0.20'
+specificationVersion: '0.23'
 apis:
 - aid: rb2b:rb2b-identification-api
   name: RB2B Identification API
