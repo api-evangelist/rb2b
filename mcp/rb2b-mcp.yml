@@ -2,157 +2,176 @@ generated: '2026-08-12'
 method: searched
 status: published
 source: https://www.npmjs.com/package/@rb2b/rb2b-apis-mcp
-description: >-
-  RB2B publishes a first-party local (stdio) MCP server, @rb2b/rb2b-apis-mcp,
-  that exposes the RB2B Identity / Enrichment API Partner Program surface
-  (https://api.rb2b.com/api/v1) as 19 MCP tools for Claude Desktop, Claude Code
-  and other MCP clients. There is no hosted/remote MCP endpoint — mcp.rb2b.com
-  does not resolve. The tool list below is EXTRACTED VERBATIM from the published
-  package's own ListToolsRequestSchema handler (dist/server.js) in version
-  1.1.7; the machine-readable form, with each tool's real inputSchema, is saved
-  alongside as mcp/rb2b-mcp-tools.json. The package README is saved as
-  mcp/rb2b-mcp-readme.md.
+description: RB2B publishes a first-party local (stdio) MCP server, @rb2b/rb2b-apis-mcp, that exposes
+  the RB2B Identity / Enrichment API Partner Program surface (https://api.rb2b.com/api/v1) as 19 MCP tools
+  for Claude Desktop, Claude Code and other MCP clients. There is no hosted/remote MCP endpoint — mcp.rb2b.com
+  does not resolve. The tool list below is EXTRACTED VERBATIM from the published package's own ListToolsRequestSchema
+  handler (dist/server.js) in version 1.1.7; the machine-readable form, with each tool's real inputSchema,
+  is saved alongside as mcp/rb2b-mcp-tools.json. The package README is saved as mcp/rb2b-mcp-readme.md.
 ownership:
   first_party: true
-  evidence: >-
-    Published under the @rb2b npm scope with package author "RB2B", MIT
-    licensed, and points users at RB2B's own API console at
-    https://ui.api.rb2b.com for accounts and keys. The git repository named in
-    package.json (github.com/robbclarke/RB2B-APIs-MCP) is not publicly readable
-    (HTTP 404 on the GitHub API); the same GitHub account publishes
-    robbclarke/RB2B-WordPress-Plugin, described as "RB2B's WordPress plugin".
-    Treated as first-party on the npm scope + author + console evidence, with
-    the repository caveat recorded here rather than hidden.
+  evidence: Published under the @rb2b npm scope with package author "RB2B", MIT licensed, and points users
+    at RB2B's own API console at https://ui.api.rb2b.com for accounts and keys. The git repository named
+    in package.json (github.com/robbclarke/RB2B-APIs-MCP) is not publicly readable (HTTP 404 on the GitHub
+    API); the same GitHub account publishes robbclarke/RB2B-WordPress-Plugin, described as "RB2B's WordPress
+    plugin". Treated as first-party on the npm scope + author + console evidence, with the repository
+    caveat recorded here rather than hidden.
 server:
   name: rb2b
   transport: stdio
   hosted: false
   remote_url: null
-  package: "@rb2b/rb2b-apis-mcp"
+  package: '@rb2b/rb2b-apis-mcp'
   version: 1.1.7
   published: '2026-04-13'
   install: npx -y @rb2b/rb2b-apis-mcp
   setup: npx -y @rb2b/rb2b-apis-mcp init
   register_claude_code: claude mcp add rb2b -- npx -y @rb2b/rb2b-apis-mcp
   auth: api-key
-  auth_detail: >-
-    The server holds an RB2B API key, stored at ~/.rb2b/config.json with mode
-    0600, and sends it upstream as the Api-Key request header. There is no OAuth
-    flow; /.well-known/oauth-authorization-server and
-    /.well-known/oauth-protected-resource both 404 on api.rb2b.com.
+  auth_detail: The server holds an RB2B API key, stored at ~/.rb2b/config.json with mode 0600, and sends
+    it upstream as the Api-Key request header. There is no OAuth flow; /.well-known/oauth-authorization-server
+    and /.well-known/oauth-protected-resource both 404 on api.rb2b.com.
   backing_api: https://api.rb2b.com/api/v1
   runtime: Node.js 18+
-  sdk: "@modelcontextprotocol/sdk ^1.0.0"
+  sdk: '@modelcontextprotocol/sdk ^1.0.0'
 runtime_semantics:
   rate_limit: 50 requests/second per endpoint (surfaced by the server as an error on HTTP 429)
-  metering: >-
-    Every paid tool deducts credits from the account balance. The server checks
-    the balance before each paid call and refuses when credits are insufficient.
-  credit_warnings: >-
-    Warnings are appended to responses at balances of 500, 200, 100, 50 and 10
-    credits — [NOTICE] 500-51, [WARNING] 50-11, [CRITICAL] 10 and below.
+  metering: Every paid tool deducts credits from the account balance. The server checks the balance before
+    each paid call and refuses when credits are insufficient.
+  credit_warnings: Warnings are appended to responses at balances of 500, 200, 100, 50 and 10 credits
+    — [NOTICE] 500-51, [WARNING] 50-11, [CRITICAL] 10 and below.
   error_mapping:
     401: Invalid API key — re-run `npx @rb2b/rb2b-apis-mcp init`
     404: No record found for the provided input
     429: Rate limit exceeded (50 requests/second per endpoint)
 tools:
-  - name: set_api_key
-    group: account
-    credits: 0
-    inputs: [api_key]
-    description: Update the RB2B API key. Validated before saving; takes effect immediately.
-  - name: help
-    group: account
-    credits: 0
-    inputs: []
-    description: List all available RB2B MCP tools with descriptions, required inputs, and credit costs.
-  - name: check_credits
-    group: account
-    credits: 0
-    inputs: []
-    description: Check the remaining API credits for the current RB2B account.
-  - name: ip_to_company
-    group: ip-lookup
-    credits: 1
-    inputs: [ip_address]
-    description: Identify the company associated with a given IP address.
-  - name: ip_to_hem
-    group: ip-lookup
-    credits: 1
-    inputs: [ip_address]
-    description: Retrieve hashed emails (MD5 and SHA256) associated with an IP address, ranked with confidence scores.
-  - name: ip_to_maid
-    group: ip-lookup
-    credits: 1
-    inputs: [ip_address]
-    description: Retrieve Mobile Advertising IDs (AAID / IDFA) associated with an IP address.
-  - name: email_to_linkedin_slug
-    group: email-to-identity
-    credits: 1
-    inputs: [email]
-    description: Look up the LinkedIn profile slug for a plain-text email address.
-  - name: email_to_best_linkedin
-    group: email-to-identity
-    credits: 1
-    inputs: [email]
-    description: Find the highest-confidence LinkedIn profile URL for a plain-text email address.
-  - name: email_to_business_profile
-    group: email-to-identity
-    credits: 2
-    inputs: [email]
-    description: Retrieve the business/employer profile (title, company, industry) for a plain-text email address.
-  - name: email_to_maid
-    group: email-to-identity
-    credits: 1
-    inputs: [email]
-    description: Retrieve the Mobile Advertising ID linked to a plain-text email address.
-  - name: hem_to_linkedin_slug
-    group: hem-to-identity
-    credits: 1
-    inputs: [md5]
-    description: Look up the LinkedIn profile slug for a hashed email (MD5).
-  - name: hem_to_best_linkedin
-    group: hem-to-identity
-    credits: 1
-    inputs: [md5]
-    description: Find the highest-confidence LinkedIn profile URL for a hashed email (MD5).
-  - name: hem_to_business_profile
-    group: hem-to-identity
-    credits: 2
-    inputs: [md5]
-    description: Retrieve the business/employer profile for a hashed email (MD5).
-  - name: hem_to_maid
-    group: hem-to-identity
-    credits: 1
-    inputs: [md5]
-    description: Retrieve the Mobile Advertising ID linked to a hashed email (MD5).
-  - name: linkedin_to_hashed_emails
-    group: linkedin-to-identity
-    credits: 1
-    inputs: [linkedin_slug]
-    description: Retrieve all hashed emails for a LinkedIn profile slug — personal and business, MD5 and SHA256 arrays.
-  - name: linkedin_to_best_personal_email
-    group: linkedin-to-identity
-    credits: 1
-    inputs: [linkedin_slug]
-    description: Get the highest-confidence personal email for a LinkedIn profile slug.
-  - name: linkedin_to_personal_email
-    group: linkedin-to-identity
-    credits: 1
-    inputs: [linkedin_slug]
-    description: Get all personal email candidates for a LinkedIn profile slug.
-  - name: linkedin_to_mobile_phone
-    group: linkedin-to-identity
-    credits: 3
-    inputs: [linkedin_slug]
-    description: Get the mobile phone number for a LinkedIn profile slug.
-  - name: linkedin_to_business_profile
-    group: linkedin-to-identity
-    credits: 4
-    inputs: [linkedin_slug]
-    description: Retrieve the business/employer profile (title, company, industry) for a LinkedIn profile slug.
+- name: set_api_key
+  group: account
+  credits: 0
+  inputs:
+  - api_key
+  description: Update the RB2B API key. Validated before saving; takes effect immediately.
+- name: help
+  group: account
+  credits: 0
+  inputs: []
+  description: List all available RB2B MCP tools with descriptions, required inputs, and credit costs.
+- name: check_credits
+  group: account
+  credits: 0
+  inputs: []
+  description: Check the remaining API credits for the current RB2B account.
+- name: ip_to_company
+  group: ip-lookup
+  credits: 1
+  inputs:
+  - ip_address
+  description: Identify the company associated with a given IP address.
+- name: ip_to_hem
+  group: ip-lookup
+  credits: 1
+  inputs:
+  - ip_address
+  description: Retrieve hashed emails (MD5 and SHA256) associated with an IP address, ranked with confidence
+    scores.
+- name: ip_to_maid
+  group: ip-lookup
+  credits: 1
+  inputs:
+  - ip_address
+  description: Retrieve Mobile Advertising IDs (AAID / IDFA) associated with an IP address.
+- name: email_to_linkedin_slug
+  group: email-to-identity
+  credits: 1
+  inputs:
+  - email
+  description: Look up the LinkedIn profile slug for a plain-text email address.
+- name: email_to_best_linkedin
+  group: email-to-identity
+  credits: 1
+  inputs:
+  - email
+  description: Find the highest-confidence LinkedIn profile URL for a plain-text email address.
+- name: email_to_business_profile
+  group: email-to-identity
+  credits: 2
+  inputs:
+  - email
+  description: Retrieve the business/employer profile (title, company, industry) for a plain-text email
+    address.
+- name: email_to_maid
+  group: email-to-identity
+  credits: 1
+  inputs:
+  - email
+  description: Retrieve the Mobile Advertising ID linked to a plain-text email address.
+- name: hem_to_linkedin_slug
+  group: hem-to-identity
+  credits: 1
+  inputs:
+  - md5
+  description: Look up the LinkedIn profile slug for a hashed email (MD5).
+- name: hem_to_best_linkedin
+  group: hem-to-identity
+  credits: 1
+  inputs:
+  - md5
+  description: Find the highest-confidence LinkedIn profile URL for a hashed email (MD5).
+- name: hem_to_business_profile
+  group: hem-to-identity
+  credits: 2
+  inputs:
+  - md5
+  description: Retrieve the business/employer profile for a hashed email (MD5).
+- name: hem_to_maid
+  group: hem-to-identity
+  credits: 1
+  inputs:
+  - md5
+  description: Retrieve the Mobile Advertising ID linked to a hashed email (MD5).
+- name: linkedin_to_hashed_emails
+  group: linkedin-to-identity
+  credits: 1
+  inputs:
+  - linkedin_slug
+  description: Retrieve all hashed emails for a LinkedIn profile slug — personal and business, MD5 and
+    SHA256 arrays.
+- name: linkedin_to_best_personal_email
+  group: linkedin-to-identity
+  credits: 1
+  inputs:
+  - linkedin_slug
+  description: Get the highest-confidence personal email for a LinkedIn profile slug.
+- name: linkedin_to_personal_email
+  group: linkedin-to-identity
+  credits: 1
+  inputs:
+  - linkedin_slug
+  description: Get all personal email candidates for a LinkedIn profile slug.
+- name: linkedin_to_mobile_phone
+  group: linkedin-to-identity
+  credits: 3
+  inputs:
+  - linkedin_slug
+  description: Get the mobile phone number for a LinkedIn profile slug.
+- name: linkedin_to_business_profile
+  group: linkedin-to-identity
+  credits: 4
+  inputs:
+  - linkedin_slug
+  description: Retrieve the business/employer profile (title, company, industry) for a LinkedIn profile
+    slug.
 tool_count: 19
 artifacts:
   tools_json: mcp/rb2b-mcp-tools.json
   readme: mcp/rb2b-mcp-readme.md
   crosswalk: mcp/rb2b-tool-crosswalk.yml
+deployment:
+  mode: none
+  endpoint: https://api.rb2b.com/api/v1
+  verified: probed
+  probe: dead
+  note: the endpoint this manifest claimed did not answer; recorded as none rather than deleted so the
+    claim stays auditable
+  checked: '2026-08-12'
+  source: catalog MCP census
