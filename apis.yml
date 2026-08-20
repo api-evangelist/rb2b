@@ -51,6 +51,23 @@ tags:
   - Hashed Email
   - Mobile Ad ID
   - Firmographics
+  - Webhook
+  - Pixel
+  - AdTech
+  - Identity Graph
+  - MCP
+tags_raw:
+  - Identity Resolution
+  - Visitor Identification
+  - B2B Data
+  - Lead Generation
+  - Sales Intelligence
+  - Marketing
+  - Data Enrichment
+  - LinkedIn Enrichment
+  - Hashed Email
+  - Mobile Ad ID
+  - Firmographics
   - Webhooks
   - Pixel
   - Adtech
@@ -177,6 +194,12 @@ apis:
 - aid: rb2b:rb2b-pixel-webhooks
   name: RB2B Pixel and Destination Webhooks
   tags:
+    - Pixel
+    - JavaScript
+    - Webhook
+    - Integration
+    - Tag Manager
+  tags_raw:
     - Pixel
     - JavaScript
     - Webhooks
