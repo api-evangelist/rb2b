@@ -47,7 +47,7 @@ accessModel:
     - https://ui.api.rb2b.com/signup
   generated: '2026-08-12'
   method: searched
-position: Provider
+position: Producing
 access: 3rd-Party
 image: https://kinlane-images.s3.amazonaws.com/shared/apis-json/icons/rb2b.png
 tags:
