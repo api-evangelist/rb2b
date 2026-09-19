@@ -173,6 +173,12 @@ apis:
   tags:
     - OEM
     - Domain Management
+    - Partners
+    - Usage
+    - Billing
+  tags_raw:
+    - OEM
+    - Domain Management
     - Partner
     - Usage
     - Billing
