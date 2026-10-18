@@ -131,6 +131,13 @@ apis:
 - aid: rb2b:rb2b-enrichment-api
   name: RB2B Enrichment API
   tags:
+    - Data Enrichment
+    - LinkedIn
+    - Email
+    - Phone
+    - Business Profile
+    - B2B Data
+  tags_raw:
     - Enrichment
     - LinkedIn
     - Email
